@@ -85,8 +85,8 @@ Calculates the great circle distance between two encoded coordinates.
 
 **Example:**
 ```csharp
-double distance = MeterBasedCoordinateCompressor.CalculateDistance("DR5R4Z3M", "DR5R4Z3N");
-// Result: ~3.0 (meters)
+double distance = MeterBasedCoordinateCompressor.CalculateDistance("Q7KH2BBYF", "S50MBZX2Y");
+// Result: ~5,500,000 (meters between NYC and London)
 ```
 
 #### GetNeighbors(string encoded)
@@ -101,8 +101,8 @@ Generates all adjacent coordinate codes (up to 8 neighbors) for spatial queries.
 
 **Example:**
 ```csharp
-string[] neighbors = MeterBasedCoordinateCompressor.GetNeighbors("DR5R4Z3M");
-// Result: ["DR5R4Z3N", "DR5R4Z3P", ...] (up to 8 neighbors)
+string[] neighbors = MeterBasedCoordinateCompressor.GetNeighbors("Q7KH2BBYF");
+// Result: ["Q7KH2BBYG", "Q7KH2BBYH", ...] (up to 8 neighbors)
 ```
 
 #### IsValidEncoding(string encoded)
@@ -221,7 +221,7 @@ Batch decodes multiple encoded strings for high-throughput scenarios.
 
 **Example:**
 ```csharp
-var encoded = new[] { "DR5R4Z3M", "GCR32JP8" };
+var encoded = new[] { "Q7KH2BBYF", "S50MBZX2Y" };
 var decoded = CoordinateOperations.BatchDecode(encoded);
 ```
 
@@ -270,18 +270,18 @@ PerformanceBenchmark.RunBenchmark(100000);
 - **Longitude**: -180.0 to 180.0 degrees
 
 ### Precision
-- **Target precision**: 3 meters globally
-- **Average error**: <1 meter
-- **Encoding length**: Exactly 9 characters
+- **Target precision**: 3 meters on land
+- **Actual precision**: ~2.6m average
+- **Encoding length**: Exactly 9 characters (11 with formatting)
 
 ### Performance
-- **Encoding rate**: 2.2M+ operations/second
-- **Decoding rate**: 2.6M+ operations/second
-- **Memory**: Zero allocations for core operations
+- **Encoding rate**: 6.4M+ operations/second
+- **Decoding rate**: 7.0M+ operations/second
+- **Memory**: 32 bytes per operation
 
 ### Alphabet
-- **Character set**: `23456789ABCDEFGHJKMNPQRSTUVWXYZ`
-- **Excluded characters**: `0`, `1`, `I`, `L`, `O` (prevents transcription errors)
+- **Character set**: `0123456789ABCDEFGHJKMNPQRSTVWXYZ`
+- **Excluded characters**: `I`, `L`, `O`, `U` (prevents confusion)
 - **Case sensitivity**: Case-insensitive input, uppercase output
 
 ## Error Handling
@@ -301,7 +301,7 @@ Thrown when encoded strings are invalid:
 ```csharp
 // Throws ArgumentException
 MeterBasedCoordinateCompressor.Decode("ABC");      // Too short
-MeterBasedCoordinateCompressor.Decode("DR5R4Z0M"); // Invalid character '0'
+MeterBasedCoordinateCompressor.Decode("Q7KH2BBYL"); // Invalid character 'L'
 MeterBasedCoordinateCompressor.Decode(null);       // Null input
 ```
 

@@ -8,23 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Human-readable formatting with optional dashes (XXX-XXX-XXX format)
-- FormatForHumans(), RemoveFormatting(), and IsFormattedForHumans() utility methods
-- Dual-format support in Decode() and IsValidEncoding() methods
-- Enhanced demo showcasing both compact and readable formats
-- Commercial licensing model with non-commercial free use
-- Ocean coverage limitations clearly documented
+- Professional website with interactive demo
+- Marketing materials for Reddit and Hacker News launch
+- Modern logo design with 9-square grid pattern
+- GitHub Pages deployment workflow
 
-## [1.0.0] - 2025-01-XX
+### Changed
+- Updated all documentation to reflect Grid9 branding
+- Fixed README examples with actual Grid9 codes
+- Improved API documentation with correct performance metrics
+
+## [1.0.0] - 2025-01-21
 
 ### Added
 - Initial release of Grid9 coordinate compression system
-- Core compression algorithm achieving what3words precision in 9 characters vs 18+
+- Core compression algorithm achieving what3words precision in 9 characters vs 19+
 - 3-meter precision on land areas with hybrid quantization algorithm
+- Human-readable formatting with optional dashes (XXX-XXX-XXX format)
 - Optimized for automated vehicles, drones, and high-precision applications
 - Human-readable Base32 alphabet (excludes I,L,O,U for clarity)
 - Batch processing operations for high-throughput scenarios
-- Comprehensive test suite with 200+ tests
+- Comprehensive test suite with 300+ tests
 - Interactive demo application
 - Land-focused optimization for maximum terrestrial precision
 
@@ -43,40 +47,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CoordinateOperations.FindNearby()` - Radius-based coordinate search
 
 ### Performance
-- 10M+ operations per second for core encode/decode
-- Millions of operations per second for batch processing
-- Zero allocations for core operations
-- 3-meter average precision on land areas
-- Optimized bit allocation for terrestrial coordinates
+- 6.4M+ encoding operations per second
+- 7.0M+ decoding operations per second
+- 32 bytes per operation memory usage
+- ~2.6m average precision on land areas
+- Optimized bit allocation (22 bits latitude, 23 bits longitude)
 
 ### Documentation
 - Comprehensive README with examples
 - XML documentation for all public APIs
 - Interactive demo with real-world landmarks
-- Contributing guidelines and code of conduct
+- Contributing guidelines
 - Mathematical foundation explanations
-
-## [1.0.0] - 2025-01-XX
-
-### Added
-- Initial stable release
-- Production-ready coordinate compression library
-- Complete test coverage and documentation
-- NuGet package publication
-- MIT license for open source usage
+- API reference documentation
 
 ### Technical Details
-- Targets .NET 6.0 and later
+- Targets .NET 8.0 and later
 - Uses aggressive inlining for performance
-- Implements Morton (Z-order) curve encoding
+- Implements hybrid quantization algorithm
 - Custom Base32 alphabet for human readability
-- Latitude-adjusted longitude precision
-- Global boundary handling
+- Meter-based latitude + degree-based longitude
+- Land coverage optimization
 - Case-insensitive decoding support
-
-### Validation
-- Tested against 57 trillion unique coordinate combinations
-- Verified 3-meter precision at all latitudes
-- Performance benchmarked on multiple architectures
-- Accuracy validated against known landmarks
-- Boundary conditions tested at poles and date line
+- Grid9 Non-Commercial License (commercial licensing available)

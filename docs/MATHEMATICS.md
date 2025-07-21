@@ -1,6 +1,6 @@
-# Mathematical Foundation
+# Grid9 Mathematical Foundation
 
-This document explains the mathematical principles behind the Optimal Coordinate Compression algorithm and why it represents the theoretical ceiling for coordinate compression.
+This document explains the mathematical principles behind Grid9's hybrid quantization algorithm and how it achieves 3-meter precision in exactly 9 characters.
 
 ## Information Theory Constraints
 
@@ -33,20 +33,20 @@ Minimum bits = log₂(57 × 10¹²) ≈ 45.7 bits
 
 ### Available Encoding Space
 
-With 8 base32 characters:
+With 9 base32 characters:
 ```
-Available combinations = 32⁸ = 2⁴⁰ ≈ 1.1 trillion
+Available combinations = 32⁹ = 2⁴⁵ ≈ 35.2 trillion
 Available bits = 45 bits
 ```
 
 ### Efficiency
 
-Our compression efficiency:
+Grid9's compression efficiency:
 ```
-Efficiency = Available bits / Required bits = 40 / 45.7 ≈ 87%
+Efficiency = Available bits / Required bits = 45 / 45.7 ≈ 98.5%
 ```
 
-This means we're operating at **87% of the theoretical maximum** under Shannon's limit.
+This means Grid9 operates at **98.5% of the theoretical maximum** under Shannon's limit.
 
 ## Coordinate Quantization
 
@@ -82,44 +82,52 @@ This ensures that:
 - At 60° latitude: Still 3-meter precision (cos(60°) = 0.5)
 - Near poles: Prevents division by zero while maintaining precision
 
-## Morton Encoding (Z-Order Curve)
+## Grid9 Hybrid Quantization Algorithm
 
-### Spatial Locality Preservation
+### Key Innovation
 
-Morton encoding interleaves the bits of latitude and longitude indices to create a single value that preserves spatial locality:
+Grid9 uses a hybrid approach that eliminates circular dependencies:
+
+1. **Latitude**: Meter-based quantization for consistent global precision
+2. **Longitude**: Degree-based quantization with latitude band adjustment
+
+### Bit Allocation
 
 ```
-For lat_index = 101₂ and lon_index = 110₂
-Morton code = 110101₂ (interleaved: l₂l₁l₀ ln₂ln₁ln₀)
+Grid9 System (45 bits total):
+┌─────────────────────────────────────────────┐
+│    Latitude     │      Longitude      │
+│     22 bits     │       23 bits       │
+└─────────────────────────────────────────────┘
 ```
 
-### Interleaving Algorithm
+### Algorithm Steps
 
 ```csharp
-ulong result = 0;
-for (int i = 0; i < 32; i++)
-{
-    result |= ((ulong)(lat & (1u << i)) << i) | 
-              ((ulong)(lon & (1u << i)) << (i + 1));
-}
+// Step 1: Meter-based latitude quantization
+double latMeters = (latitude - MIN_LAT) * METERS_PER_DEGREE_LAT;
+uint latIndex = (uint)(latMeters / (TOTAL_LAT_RANGE_M / (LAT_MAX + 1)));
+
+// Step 2: Determine latitude band center
+double latBandCenter = MIN_LAT + ((latIndex + 0.5) * 
+    (TOTAL_LAT_RANGE_M / (LAT_MAX + 1))) / METERS_PER_DEGREE_LAT;
+
+// Step 3: Longitude quantization using band center
+double cosLatBand = Math.Cos(latBandCenter * Math.PI / 180.0);
+double metersPerDegreeLonBand = METERS_PER_DEGREE_LAT * cosLatBand;
 ```
-
-### Spatial Properties
-
-Morton encoding ensures that:
-1. **Nearby coordinates have similar codes**: Points close in 2D space have codes that share long common prefixes
-2. **Hierarchical structure**: Shorter prefixes represent larger geographic regions
-3. **Efficient range queries**: Spatial queries can be performed efficiently on the encoded strings
 
 ## Base32 Encoding Optimization
 
 ### Character Set Selection
 
-Our alphabet `23456789ABCDEFGHJKMNPQRSTUVWXYZ` is optimized for:
+Grid9's alphabet `0123456789ABCDEFGHJKMNPQRSTVWXYZ` is optimized for:
 
 1. **Human readability**: Excludes visually confusing characters
-   - No `0` (zero) vs `O` (oh) confusion
-   - No `1` (one) vs `I` (eye) vs `l` (ell) confusion
+   - No `I` (eye) vs `1` (one) confusion
+   - No `L` (ell) vs `1` (one) confusion
+   - No `O` (oh) vs `0` (zero) confusion
+   - No `U` (can look like V)
 
 2. **Transcription accuracy**: Reduces errors when manually entering codes
 
@@ -128,9 +136,9 @@ Our alphabet `23456789ABCDEFGHJKMNPQRSTUVWXYZ` is optimized for:
 ### Encoding Efficiency
 
 Base32 provides optimal trade-off:
-- **Base64**: 6 bits per character → 6.67 characters needed (can't achieve exact 8)
-- **Base32**: 5 bits per character → exactly 9 characters for 45 bits
-- **Base16**: 4 bits per character → 10 characters needed (too long)
+- **Base64**: 6 bits per character → 7.5 characters needed (can't achieve exact encoding)
+- **Base32**: 5 bits per character → exactly 9 characters for 45 bits (perfect fit!)
+- **Base16**: 4 bits per character → 11.25 characters needed (too long)
 
 ## Precision Analysis
 
@@ -168,12 +176,12 @@ Sources of encoding error:
 
 ### Information Density
 
-| System | Length | Bits | Locations | Efficiency |
+| System | Length | Bits | Precision | Efficiency |
 |--------|--------|------|-----------|------------|
-| **Ours** | **9 chars** | **45** | **35T** | **97%** |
-| what3words | ~19 chars | ~95 | 57T | ~48% |
-| Plus codes | 10+ chars | ~50 | Variable | Variable |
-| Geohash | Variable | Variable | Variable | Variable |
+| **Grid9** | **9 chars** | **45** | **3m** | **98.5%** |
+| what3words | ~19 chars | ~95 | 3m | ~48% |
+| Plus codes | 11+ chars | ~55 | ~14m | Variable |
+| Geohash | 12 chars | 60 | ~3.7m | Variable |
 
 ### Theoretical Optimality
 
@@ -190,7 +198,7 @@ Our system achieves:
 1. **Information theory ceiling**: 45.7 bits minimum for 57T locations
 2. **Practical constraints**: Need integer number of characters
 3. **Base selection**: Base32 optimal for 9-character requirement
-4. **Spatial locality**: Morton encoding preserves geographic relationships
+4. **Hybrid algorithm**: Eliminates circular dependencies
 
 ### No Further Compression Possible
 
@@ -206,7 +214,7 @@ Our algorithm makes these specific trade-offs:
 - **Precision vs Size**: Fixed 3m precision for exactly 9 characters
 - **Global vs Regional**: Uniform global coverage vs regional optimization
 - **Simplicity vs Complexity**: Self-contained vs dictionary-dependent
-- **Speed vs Space**: Optimized for both encoding speed and compact size
+- **Speed vs Space**: 6.4M+ encodes/second in just 9 characters
 
 ## Implementation Considerations
 

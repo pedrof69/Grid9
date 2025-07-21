@@ -74,15 +74,14 @@ string unformatted = MeterBasedCoordinateCompressor.RemoveFormatting("Q7K-H2B-BY
 
 ## Precision Comparison
 
-| Location Type | This System | What3Words | Improvement |
-|---------------|-------------|------------|-------------|
-| **Major Cities** | **1m** | 3m | **3x better** |
-| **Towns/Suburbs** | **3m** | 3m | **Same** |
-| **Rural Areas** | 10m | 3m | 3x worse |
-| **Wilderness** | 30m | 3m | 10x worse |
-| **Ocean** | ❌ Not supported | 3m | N/A |
+| System | Characters | Land Precision | Ocean Support | Example |
+|--------|------------|----------------|---------------|---------|
+| **Grid9** | **9** | **3m** | Limited | `Q7KH2BBYF` |
+| What3Words | 19+ | 3m | Yes | `filled.count.soap` |
+| Plus Codes | 11+ | ~14m | Yes | `87G8Q23F+GF` |
+| Geohash | 12 | ~3.7m | Yes | `dr5regw3pg6` |
 
-**Result: 99% of human activity gets equal or better precision with shorter codes!**
+**Result: Grid9 matches what3words precision in 53% fewer characters!**
 
 ## Coverage Examples
 
@@ -99,40 +98,38 @@ string unformatted = MeterBasedCoordinateCompressor.RemoveFormatting("Q7K-H2B-BY
 
 ## Architecture
 
-### Three Compression Systems
+### Grid9 Compression System
 
-1. **EightCharacterCompressor** ⭐ *Recommended*
-   - 8 characters (40 bits)
-   - Adaptive precision zones
-   - Land-only coverage
-   - Population-weighted accuracy
-
-2. **MeterBasedCoordinateCompressor**
-   - 9 characters (45 bits) 
-   - Uniform 3m precision globally
-   - Ocean support
-   - Mathematical precision limit
-
-3. **PopulationWeightedCompressor** *Experimental*
-   - Variable precision by population density
-   - Complex zone management
-   - Research prototype
+Grid9 uses the **MeterBasedCoordinateCompressor** algorithm:
+- 9 characters (45 bits total)
+- Uniform 3m precision on land
+- Hybrid quantization approach
+- No circular dependencies
 
 ### Bit Allocation Strategy
 
 ```
-8-Character System (40 bits):
+Grid9 System (45 bits):
 ┌─────────────────────────────────────────────┐
-│ Zone │    Latitude    │    Longitude    │
-│ 2bit │     19bit      │      19bit      │
+│    Latitude     │      Longitude      │
+│     22 bits     │       23 bits       │
 └─────────────────────────────────────────────┘
 
-Zones:
-- 00: Cities (1m precision)
-- 01: Suburbs (3m precision)  
-- 10: Rural (10m precision)
-- 11: Wilderness (30m precision)
+Encoding: 45 bits → 9 × 5-bit base32 characters
 ```
+
+### Technical Implementation
+
+**Hybrid Quantization Algorithm:**
+- **Latitude**: Meter-based quantization for consistent global precision (~2.4m)
+- **Longitude**: Degree-based quantization with latitude-aware scaling (~2.7m at equator)
+- **Result**: Combined precision of ~3m globally on land
+
+**Base32 Alphabet:**
+```
+0123456789ABCDEFGHJKMNPQRSTVWXYZ
+```
+Excludes I, L, O, U to avoid confusion with numbers and improve readability.
 
 ## Advanced Usage
 
@@ -146,31 +143,32 @@ var coordinates = new[] {
 };
 
 // Process all at once
-string[] codes = coordinates.Select(c => EightCharacterCompressor.Encode(c.Item1, c.Item2)).ToArray();
+string[] codes = coordinates.Select(c => MeterBasedCoordinateCompressor.Encode(c.Item1, c.Item2)).ToArray();
 ```
 
 ### Error Handling
 ```csharp
 try {
-    string code = EightCharacterCompressor.Encode(0.0, -140.0); // Pacific Ocean
+    string code = MeterBasedCoordinateCompressor.Encode(0.0, -140.0); // Pacific Ocean
+    // Note: Grid9 will encode ocean coordinates but precision is optimized for land
 }
 catch (ArgumentException ex) {
-    Console.WriteLine("Ocean coordinates not supported in land-only system");
+    Console.WriteLine("Error encoding coordinates: " + ex.Message);
 }
 ```
 
 ### Zone Detection
 ```csharp
-// Understand how locations are classified
+// Get precision information for different locations
 var locations = new[] {
-    (40.7128, -74.0060, "NYC - should be Cities"),
+    (40.7128, -74.0060, "NYC"),
     (45.0, -93.0, "Rural Minnesota"),
-    (65.0, -150.0, "Alaska wilderness")
+    (65.0, -150.0, "Alaska")
 };
 
 foreach (var (lat, lon, desc) in locations) {
-    var (precision, zone, error) = EightCharacterCompressor.GetLocationInfo(lat, lon);
-    Console.WriteLine($"{desc}: {zone} zone, {precision}m target precision");
+    var (latError, lonError, totalError) = MeterBasedCoordinateCompressor.GetActualPrecision(lat, lon);
+    Console.WriteLine($"{desc}: {totalError:F1}m precision");
 }
 ```
 
@@ -195,18 +193,18 @@ foreach (var (lat, lon, desc) in locations) {
 
 ### Mathematical Foundation
 
-The 8-character system pushes the boundaries of information theory:
-- **40 bits available** (8 × 5-bit base32)
-- **Land-only optimization** saves ~1.5 bits vs global coverage
-- **Population weighting** optimizes precision allocation
-- **Zone-based encoding** adapts to real-world needs
+The Grid9 system achieves optimal information density:
+- **45 bits available** (9 × 5-bit base32)
+- **Hybrid quantization** balances latitude/longitude precision
+- **Land optimization** focuses accuracy where needed
+- **No lookup tables** pure mathematical encoding
 
 ### Information Theory Analysis
 ```
 Total 3m cells globally: 57 trillion (requires 45.7 bits)
 Land-only 3m cells: 16.55 trillion (requires 44 bits)
 Population-weighted: Variable precision needs only ~40 bits
-Result: Perfect fit in 8 characters!
+Result: 3-meter precision in exactly 9 characters!
 ```
 
 ### Algorithm Steps
@@ -214,7 +212,7 @@ Result: Perfect fit in 8 characters!
 2. **Precision Allocation**: Use appropriate precision for zone
 3. **Quantization**: Convert coordinates to cell indices
 4. **Bit Packing**: Pack zone + coordinates into 40 bits
-5. **Base32 Encoding**: Convert to human-readable 8-character string
+5. **Base32 Encoding**: Convert to human-readable 9-character string
 
 ## Building & Testing
 

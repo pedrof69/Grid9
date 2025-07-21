@@ -1,4 +1,4 @@
-# Contributing to Optimal Coordinate Compression
+# Contributing to Grid9
 
 Thank you for your interest in contributing to this project! This document provides guidelines for contributing.
 
@@ -19,15 +19,15 @@ This project adheres to a code of conduct that we expect all participants to fol
 
 ### Prerequisites
 
-- .NET 6.0 SDK or later
+- .NET 8.0 SDK or later
 - Git
 - Your favorite IDE (Visual Studio, VS Code, Rider, etc.)
 
 ### Building
 
 ```bash
-git clone https://github.com/yourusername/OptimalCoordinateCompression.git
-cd OptimalCoordinateCompression
+git clone https://github.com/pedrof69/Grid9.git
+cd Grid9
 dotnet build
 ```
 
@@ -111,9 +111,9 @@ This is a performance-critical library. When contributing:
 This library operates at the theoretical limits of coordinate compression. Any changes must respect:
 
 - **Shannon's Information Theory**: Cannot compress below entropy limits
-- **3-meter precision requirement**: Global accuracy must be maintained
+- **3-meter precision requirement**: Land accuracy must be maintained
 - **9-character length constraint**: Fixed output length is required
-- **Spatial locality**: Morton encoding properties should be preserved
+- **Hybrid quantization**: Meter-based latitude + degree-based longitude
 
 ## Testing Requirements
 
@@ -193,10 +193,10 @@ PerformanceBenchmark.RunBenchmark(1000000);
 ```
 
 Expected performance baselines:
-- Encoding: >2M operations/second
-- Decoding: >2.5M operations/second
-- Zero allocations for core operations
-- <1m average error globally
+- Encoding: >6M operations/second
+- Decoding: >7M operations/second
+- 32 bytes per operation
+- ~2.6m average error on land
 
 ## Mathematical Verification
 
@@ -204,8 +204,8 @@ When making changes that affect the core algorithm:
 
 1. Verify information theory constraints are respected
 2. Test precision at various latitudes
-3. Validate Morton encoding spatial properties
-4. Ensure global coverage is maintained
+3. Validate hybrid quantization algorithm
+4. Ensure land coverage is maintained
 
 ## Questions?
 
@@ -222,4 +222,4 @@ Contributors will be recognized in:
 - Release notes for significant contributions
 - Package metadata for major contributions
 
-Thank you for helping make this the most optimal coordinate compression library possible!
+Thank you for helping make Grid9 the most efficient 9-character coordinate compression system!

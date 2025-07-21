@@ -4,10 +4,11 @@
 The Grid9 logo represents the core concept of the technology - transforming complex coordinates into a 9-character grid system.
 
 ## Visual Design
-- **3x3 Grid Pattern**: Represents the 9-character system
-- **Number 9 Shape**: The filled squares form the shape of the number "9"
+- **3x3 Grid Pattern**: Shows all 9 squares representing the 9-character system
+- **Number 9 Overlay**: Bold "9" overlaid on the grid emphasizes the brand
 - **Gradient Colors**: Purple to blue gradient (#667eea to #764ba2) representing precision and technology
 - **Rounded Corners**: Modern, approachable design
+- **Semi-transparent Grid**: Grid squares at 30-50% opacity with solid "9" on top
 
 ## Logo Variations
 

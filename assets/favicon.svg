@@ -9,18 +9,22 @@
   
   <rect width="32" height="32" fill="white" rx="4"/>
   
-  <!-- Mini 3x3 Grid forming "9" -->
+  <!-- Mini 3x3 Grid with 9 -->
   <g transform="translate(6, 6)">
-    <!-- Top row -->
-    <rect x="0" y="0" width="5" height="5" fill="url(#faviconGradient)" rx="1"/>
-    <rect x="7.5" y="0" width="5" height="5" fill="url(#faviconGradient)" rx="1"/>
-    <rect x="15" y="0" width="5" height="5" fill="url(#faviconGradient)" rx="1"/>
+    <!-- All 9 mini squares -->
+    <rect x="0" y="0" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
+    <rect x="7.5" y="0" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
+    <rect x="15" y="0" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
     
-    <!-- Middle row -->
-    <rect x="7.5" y="7.5" width="5" height="5" fill="url(#faviconGradient)" rx="1"/>
-    <rect x="15" y="7.5" width="5" height="5" fill="url(#faviconGradient)" rx="1"/>
+    <rect x="0" y="7.5" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
+    <rect x="7.5" y="7.5" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
+    <rect x="15" y="7.5" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
     
-    <!-- Bottom -->
-    <rect x="15" y="15" width="5" height="5" fill="url(#faviconGradient)" rx="1"/>
+    <rect x="0" y="15" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
+    <rect x="7.5" y="15" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
+    <rect x="15" y="15" width="5" height="5" fill="url(#faviconGradient)" rx="1" opacity="0.3"/>
   </g>
+  
+  <!-- Number 9 overlay -->
+  <text x="16" y="24" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="url(#faviconGradient)">9</text>
 </svg>

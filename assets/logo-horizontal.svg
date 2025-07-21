@@ -9,15 +9,21 @@
   
   <!-- Icon -->
   <g transform="translate(20, 20)">
-    <!-- 3x3 Grid forming "9" -->
-    <rect x="0" y="0" width="16" height="16" fill="url(#horizontalGradient)" rx="2"/>
-    <rect x="22" y="0" width="16" height="16" fill="url(#horizontalGradient)" rx="2"/>
-    <rect x="44" y="0" width="16" height="16" fill="url(#horizontalGradient)" rx="2"/>
+    <!-- All 9 squares in 3x3 grid -->
+    <rect x="0" y="0" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
+    <rect x="22" y="0" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
+    <rect x="44" y="0" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
     
-    <rect x="22" y="22" width="16" height="16" fill="url(#horizontalGradient)" rx="2"/>
-    <rect x="44" y="22" width="16" height="16" fill="url(#horizontalGradient)" rx="2"/>
+    <rect x="0" y="22" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
+    <rect x="22" y="22" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
+    <rect x="44" y="22" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
     
-    <rect x="44" y="44" width="16" height="16" fill="url(#horizontalGradient)" rx="2"/>
+    <rect x="0" y="44" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
+    <rect x="22" y="44" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
+    <rect x="44" y="44" width="16" height="16" fill="url(#horizontalGradient)" rx="2" opacity="0.3"/>
+    
+    <!-- Number 9 overlay -->
+    <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="url(#horizontalGradient)">9</text>
   </g>
   
   <!-- Text -->

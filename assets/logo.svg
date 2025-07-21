@@ -24,19 +24,23 @@
   <!-- Background circle -->
   <circle cx="100" cy="100" r="90" fill="white" filter="url(#shadow)"/>
   
-  <!-- 3x3 Grid Pattern forming "9" shape -->
+  <!-- 3x3 Grid Pattern with 9 highlighted in center -->
   <g transform="translate(50, 50)">
-    <!-- Top row - complete -->
-    <rect x="0" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
-    <rect x="36" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
-    <rect x="72" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    <!-- All 9 squares in 3x3 grid -->
+    <rect x="0" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
+    <rect x="36" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
+    <rect x="72" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
     
-    <!-- Middle row - only middle and right -->
-    <rect x="36" y="36" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
-    <rect x="72" y="36" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    <rect x="0" y="36" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
+    <rect x="36" y="36" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
+    <rect x="72" y="36" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
     
-    <!-- Bottom row - only right (completing the "9") -->
-    <rect x="72" y="72" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    <rect x="0" y="72" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
+    <rect x="36" y="72" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
+    <rect x="72" y="72" width="28" height="28" fill="url(#gridGradient)" rx="4" opacity="0.3"/>
+    
+    <!-- Number 9 overlay in center -->
+    <text x="50" y="65" font-family="Arial, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" fill="url(#gridGradient)">9</text>
   </g>
   
   <!-- Optional: Add "GRID9" text below -->

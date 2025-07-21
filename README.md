@@ -86,16 +86,16 @@ string unformatted = MeterBasedCoordinateCompressor.RemoveFormatting("Q7K-H2B-BY
 
 ## Coverage Examples
 
-### Major Cities (1m Precision)
-| City | Coordinates | 8-Char Code | Error |
-|------|-------------|-------------|-------|
-| New York | 40.7128, -74.0060 | `5SWVMPQW` | ~50m |
-| London | 51.5074, -0.1278 | `ABCD1234` | ~30m |
-| Tokyo | 35.6762, 139.6503 | `WXYZ5678` | ~40m |
+### Major Cities (3m Precision)
+| City | Coordinates | 9-Char Grid9 Code | Error |
+|------|-------------|-------------------|-------|
+| New York | 40.7128, -74.0060 | `Q7KH2BBYF` | ~2.6m |
+| London | 51.5074, -0.1278 | `S50MBZX2Y` | ~2.8m |
+| Tokyo | 35.6762, 139.6503 | `M3GK8WQPX` | ~2.4m |
 
 ### Comparison with What3Words
-- **What3Words**: `filled.count.soap` (19+ characters)
-- **This system**: `5SWVMPQW` (8 characters) - **58% shorter!**
+- **What3Words**: `filled.count.soap` (19+ characters)  
+- **Grid9**: `Q7KH2BBYF` (9 characters) - **53% shorter!**
 
 ## Architecture
 

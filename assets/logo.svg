@@ -1,0 +1,44 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Grid9 Logo: 3x3 grid with "9" integration -->
+  <defs>
+    <!-- Gradient for modern look -->
+    <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.2"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="white" filter="url(#shadow)"/>
+  
+  <!-- 3x3 Grid Pattern forming "9" shape -->
+  <g transform="translate(50, 50)">
+    <!-- Top row - complete -->
+    <rect x="0" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    <rect x="36" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    <rect x="72" y="0" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    
+    <!-- Middle row - only middle and right -->
+    <rect x="36" y="36" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    <rect x="72" y="36" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+    
+    <!-- Bottom row - only right (completing the "9") -->
+    <rect x="72" y="72" width="28" height="28" fill="url(#gridGradient)" rx="4"/>
+  </g>
+  
+  <!-- Optional: Add "GRID9" text below -->
+  <text x="100" y="170" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#4a5568">GRID9</text>
+</svg>

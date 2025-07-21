@@ -6,6 +6,7 @@
     <title>Grid9 - 3-Meter Precision Coordinate Compression</title>
     <meta name="description" content="Grid9: Revolutionary 9-character coordinate compression with 3-meter precision. What3words accuracy in a compact format for autonomous vehicles and precision applications.">
     <meta name="keywords" content="coordinate compression, GPS, location encoding, autonomous vehicles, precision agriculture, Grid9">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     
     <style>
         * {
@@ -45,9 +46,17 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 2rem;
             font-weight: bold;
             color: #4a5568;
+        }
+        
+        .logo svg {
+            width: 40px;
+            height: 40px;
         }
 
         .nav-links {
@@ -314,7 +323,25 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav container">
-            <div class="logo">Grid9</div>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(20, 20)">
+                        <rect x="0" y="0" width="16" height="16" fill="url(#logoGradient)" rx="2"/>
+                        <rect x="22" y="0" width="16" height="16" fill="url(#logoGradient)" rx="2"/>
+                        <rect x="44" y="0" width="16" height="16" fill="url(#logoGradient)" rx="2"/>
+                        <rect x="22" y="22" width="16" height="16" fill="url(#logoGradient)" rx="2"/>
+                        <rect x="44" y="22" width="16" height="16" fill="url(#logoGradient)" rx="2"/>
+                        <rect x="44" y="44" width="16" height="16" fill="url(#logoGradient)" rx="2"/>
+                    </g>
+                </svg>
+                Grid9
+            </div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#demo">Demo</a></li>
@@ -329,6 +356,33 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
+                <svg width="120" height="120" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto 2rem; display: block;">
+                    <defs>
+                        <linearGradient id="heroLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:0.9" />
+                        </linearGradient>
+                        <filter id="heroShadow">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                            <feOffset dx="0" dy="4" result="offsetblur"/>
+                            <feComponentTransfer>
+                                <feFuncA type="linear" slope="0.2"/>
+                            </feComponentTransfer>
+                            <feMerge> 
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/> 
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g transform="translate(20, 20)" filter="url(#heroShadow)">
+                        <rect x="0" y="0" width="16" height="16" fill="url(#heroLogoGradient)" rx="2"/>
+                        <rect x="22" y="0" width="16" height="16" fill="url(#heroLogoGradient)" rx="2"/>
+                        <rect x="44" y="0" width="16" height="16" fill="url(#heroLogoGradient)" rx="2"/>
+                        <rect x="22" y="22" width="16" height="16" fill="url(#heroLogoGradient)" rx="2"/>
+                        <rect x="44" y="22" width="16" height="16" fill="url(#heroLogoGradient)" rx="2"/>
+                        <rect x="44" y="44" width="16" height="16" fill="url(#heroLogoGradient)" rx="2"/>
+                    </g>
+                </svg>
                 <h1>Grid9</h1>
                 <div class="subtitle">3-Meter Precision Coordinate Compression</div>
                 <div class="description">

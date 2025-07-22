@@ -18,7 +18,7 @@
 Hey everyone! I'm excited to share Grid9, an open-source coordinate compression system I've been working on.
 
 **What is Grid9?**
-Grid9 compresses GPS coordinates into just 9 characters while maintaining 3-meter precision on land - the same accuracy as what3words but 53% shorter.
+Grid9 compresses GPS coordinates into just 9 characters while maintaining uniform 3-meter precision globally - the same accuracy as what3words but 53% shorter.
 
 **Key Features:**
 - **9-character codes**: `Q7KH2BBYF` instead of `40.7128, -74.0060`
@@ -32,13 +32,13 @@ Grid9 compresses GPS coordinates into just 9 characters while maintaining 3-mete
 The push for autonomous vehicles and precision applications demands compact, accurate location encoding. Traditional lat/lon is too verbose for bandwidth-constrained systems, and what3words, while brilliant, uses 19+ characters. Grid9 achieves the same precision in just 9 characters.
 
 **Technical approach:**
-Grid9 uses a hybrid quantization algorithm - meter-based latitude encoding combined with degree-based longitude encoding. This eliminates circular dependencies while maintaining consistent global precision. The result fits perfectly into 45 bits (9 × 5-bit base32 characters).
+Grid9 uses uniform coordinate quantization - direct latitude and longitude quantization in degree space. This simple approach achieves consistent global precision without complex projections. The result fits perfectly into 45 bits (9 × 5-bit base32 characters).
 
 **Example:**
 ```
 New York: 40.7128, -74.0060 → Q7KH2BBYF
 London:   51.5074, -0.1278  → S50MBZX2Y  
-Tokyo:    35.6762, 139.6503 → M3GK8WQPX
+Tokyo:    35.6762, 139.6503 → PAYMZ39T7
 ```
 
 **Get started:**
@@ -61,4 +61,4 @@ Add: "The codebase is in C# with zero dependencies. PRs welcome for ports to oth
 Add: "Designed specifically for autonomous vehicle waypoint storage and real-time navigation data."
 
 ### For r/gis:
-Add: "Note: Grid9 is optimized for land-based coordinates. Ocean coverage isn't supported as the algorithm focuses on terrestrial precision where human activity occurs."
+Add: "Grid9 provides uniform precision globally including oceans and polar regions - 2.4-3.5m accuracy everywhere on Earth."

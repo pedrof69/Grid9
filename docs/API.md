@@ -86,12 +86,29 @@ Calculates the great circle distance between two encoded coordinates.
 **Example:**
 ```csharp
 double distance = UniformPrecisionCoordinateCompressor.CalculateDistance("Q7KH2BBYF", "S50MBZX2Y");
-// Result: ~5,500,000 (meters between NYC and London)
+// Result: 5570224 (meters between NYC and London)
+```
+
+#### GetActualPrecision(double latitude, double longitude)
+
+Get the actual precision at a given coordinate location.
+
+**Parameters:**
+- `latitude` (double): Latitude in decimal degrees
+- `longitude` (double): Longitude in decimal degrees
+
+**Returns:**
+- `(double xErrorM, double yErrorM, double totalErrorM)`: Tuple of precision errors in meters
+
+**Example:**
+```csharp
+var (xError, yError, totalError) = UniformPrecisionCoordinateCompressor.GetActualPrecision(40.7128, -74.0060);
+// Result: (1.8m, 2.4m, 3.0m)
 ```
 
 #### GetNeighbors(string encoded)
 
-Generates all adjacent coordinate codes (up to 8 neighbors) for spatial queries.
+Generate neighboring coordinates for spatial queries. Returns up to 8 neighboring Grid9 codes around the given coordinate.
 
 **Parameters:**
 - `encoded` (string): Center coordinate encoding
@@ -102,7 +119,7 @@ Generates all adjacent coordinate codes (up to 8 neighbors) for spatial queries.
 **Example:**
 ```csharp
 string[] neighbors = UniformPrecisionCoordinateCompressor.GetNeighbors("Q7KH2BBYF");
-// Result: ["Q7KH2BBYG", "Q7KH2BBYH", ...] (up to 8 neighbors)
+// Result: Array of up to 8 neighboring Grid9 codes
 ```
 
 #### IsValidEncoding(string encoded)
@@ -195,26 +212,27 @@ High-performance operations for batch processing and spatial queries.
 
 #### BatchEncode(ReadOnlySpan<(double lat, double lon)> coordinates)
 
-Batch encodes multiple coordinate pairs for high-throughput scenarios.
+Batch encodes multiple coordinate pairs for high-throughput scenarios using the UniformPrecisionCoordinateCompressor.
 
 **Parameters:**
 - `coordinates` (ReadOnlySpan): Span of coordinate tuples
 
 **Returns:**
-- `string[]`: Array of encoded coordinate strings
+- `string[]`: Array of encoded Grid9 coordinate strings
 
 **Example:**
 ```csharp
 var coords = new[] { (40.7128, -74.0060), (51.5074, -0.1278) };
 string[] encoded = CoordinateOperations.BatchEncode(coords);
+// Result: ["Q7KH2BBYF", "S50MBZX2Y"]
 ```
 
 #### BatchDecode(ReadOnlySpan<string> encoded)
 
-Batch decodes multiple encoded strings for high-throughput scenarios.
+Batch decodes multiple encoded strings for high-throughput scenarios using the UniformPrecisionCoordinateCompressor.
 
 **Parameters:**
-- `encoded` (ReadOnlySpan): Span of encoded coordinate strings
+- `encoded` (ReadOnlySpan): Span of encoded Grid9 coordinate strings
 
 **Returns:**
 - `(double lat, double lon)[]`: Array of coordinate tuples
@@ -223,6 +241,7 @@ Batch decodes multiple encoded strings for high-throughput scenarios.
 ```csharp
 var encoded = new[] { "Q7KH2BBYF", "S50MBZX2Y" };
 var decoded = CoordinateOperations.BatchDecode(encoded);
+// Result: [(40.7128, -74.0060), (51.5074, -0.1278)]
 ```
 
 #### FindNearby(double centerLat, double centerLon, double radiusMeters, int maxResults = 100)
@@ -244,24 +263,6 @@ string[] nearby = CoordinateOperations.FindNearby(40.7128, -74.0060, 100);
 // Returns coordinates within 100 meters of NYC coordinates
 ```
 
-## PerformanceBenchmark
-
-Utilities for benchmarking compression system performance.
-
-### Methods
-
-#### RunBenchmark(int iterations = 1000000)
-
-Benchmarks encoding/decoding performance with random coordinates.
-
-**Parameters:**
-- `iterations` (int): Number of operations to benchmark (default: 1,000,000)
-
-**Example:**
-```csharp
-PerformanceBenchmark.RunBenchmark(100000);
-// Outputs performance metrics to console
-```
 
 ## Constants and Limits
 

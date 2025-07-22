@@ -18,7 +18,7 @@ namespace OptimalCoordinateCompression
             for (int i = 0; i < coordinates.Length; i++)
             {
                 var (lat, lon) = coordinates[i];
-                results[i] = MeterBasedCoordinateCompressor.Encode(lat, lon);
+                results[i] = UniformPrecisionCoordinateCompressor.Encode(lat, lon);
             }
             
             return results;
@@ -33,7 +33,7 @@ namespace OptimalCoordinateCompression
             
             for (int i = 0; i < encoded.Length; i++)
             {
-                results[i] = MeterBasedCoordinateCompressor.Decode(encoded[i]);
+                results[i] = UniformPrecisionCoordinateCompressor.Decode(encoded[i]);
             }
             
             return results;
@@ -46,7 +46,7 @@ namespace OptimalCoordinateCompression
         public static string[] FindNearby(double centerLat, double centerLon, double radiusMeters, int maxResults = 100)
         {
             var results = new List<string>();
-            string centerEncoded = MeterBasedCoordinateCompressor.Encode(centerLat, centerLon);
+            string centerEncoded = UniformPrecisionCoordinateCompressor.Encode(centerLat, centerLon);
             
             // Calculate approximate grid search bounds
             double latDelta = radiusMeters / 111320.0; // Rough conversion
@@ -67,8 +67,8 @@ namespace OptimalCoordinateCompression
                 {
                     try
                     {
-                        string encoded = MeterBasedCoordinateCompressor.Encode(lat, lon);
-                        double distance = MeterBasedCoordinateCompressor.CalculateDistance(centerEncoded, encoded);
+                        string encoded = UniformPrecisionCoordinateCompressor.Encode(lat, lon);
+                        double distance = UniformPrecisionCoordinateCompressor.CalculateDistance(centerEncoded, encoded);
                         
                         if (distance <= radiusMeters)
                         {

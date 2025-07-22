@@ -26,7 +26,7 @@ Grid9 delivers consistent **3-meter precision** everywhere using optimized coord
 ### Installation
 
 ```bash
-dotnet add package OptimalCoordinateCompression
+dotnet add package Grid9
 ```
 
 ### Basic Usage
@@ -45,11 +45,11 @@ string readable = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060,
 // Both formats decode to identical coordinates
 var (lat1, lon1) = UniformPrecisionCoordinateCompressor.Decode("Q7KH2BBYF");
 var (lat2, lon2) = UniformPrecisionCoordinateCompressor.Decode("Q7K-H2B-BYF");
-// Both return: (40.712800, -74.006000)
+// Both return: (40.712779, -74.005988)
 
 // Get precision information
 var (latError, lonError, totalError) = UniformPrecisionCoordinateCompressor.GetActualPrecision(40.7128, -74.0060);
-// Result: (2.4m, 2.1m, 2.6m)
+// Result: (1.8m, 2.4m, 3.0m)
 ```
 
 ### Alternative Systems
@@ -57,7 +57,7 @@ var (latError, lonError, totalError) = UniformPrecisionCoordinateCompressor.GetA
 ```csharp
 // Grid9 distance calculation
 double distance = UniformPrecisionCoordinateCompressor.CalculateDistance("Q7KH2BBYF", "S50MBZX2Y");
-// Result: ~5,500,000m (NYC to London)
+// Result: 5,570,224m (NYC to London)
 
 // Grid9 validation (works with both formats)
 bool isValid1 = UniformPrecisionCoordinateCompressor.IsValidEncoding("Q7KH2BBYF");
@@ -88,9 +88,9 @@ string unformatted = UniformPrecisionCoordinateCompressor.RemoveFormatting("Q7K-
 ### Major Cities (3m Precision)
 | City | Coordinates | 9-Char Grid9 Code | Error |
 |------|-------------|-------------------|-------|
-| New York | 40.7128, -74.0060 | `Q7KH2BBYF` | ~2.6m |
+| New York | 40.7128, -74.0060 | `Q7KH2BBYF` | ~3.0m |
 | London | 51.5074, -0.1278 | `S50MBZX2Y` | ~2.8m |
-| Tokyo | 35.6762, 139.6503 | `M3GK8WQPX` | ~2.4m |
+| Tokyo | 35.6762, 139.6503 | `PAYMZ39T7` | ~3.1m |
 
 ### Comparison with What3Words
 - **What3Words**: `filled.count.soap` (19+ characters)  
@@ -222,8 +222,8 @@ Result: 3-meter precision in exactly 9 characters!
 
 ### Build
 ```bash
-git clone https://github.com/yourusername/OptimalCoordinateCompression.git
-cd OptimalCoordinateCompression
+git clone https://github.com/pedrof69/Grid9.git
+cd Grid9
 dotnet build
 ```
 
@@ -237,10 +237,6 @@ dotnet test --logger console
 dotnet run --project demo
 ```
 
-### Run Benchmarks
-```bash
-dotnet run --project src/PerformanceBenchmark.cs -c Release
-```
 
 ## Motivation: High-Precision Automated Systems
 

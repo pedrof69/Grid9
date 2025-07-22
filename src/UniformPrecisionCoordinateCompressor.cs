@@ -371,5 +371,50 @@ namespace OptimalCoordinateCompression
                    code[3] == '-' && 
                    code[7] == '-';
         }
+
+        /// <summary>
+        /// Generate neighboring coordinates for spatial queries
+        /// Returns up to 8 neighboring Grid9 codes around the given coordinate
+        /// </summary>
+        /// <param name="encoded">Center coordinate encoding</param>
+        /// <returns>Array of neighboring coordinate encodings</returns>
+        public static string[] GetNeighbors(string encoded)
+        {
+            var (lat, lon) = Decode(encoded);
+            
+            // Calculate step size based on quantization precision
+            double latStepDeg = 180.0 / (LAT_MAX + 1);
+            double lonStepDeg = 360.0 / (LON_MAX + 1);
+            
+            var neighbors = new System.Collections.Generic.List<string>();
+            
+            for (int latOffset = -1; latOffset <= 1; latOffset++)
+            {
+                for (int lonOffset = -1; lonOffset <= 1; lonOffset++)
+                {
+                    if (latOffset == 0 && lonOffset == 0) continue; // Skip center
+                    
+                    double neighborLat = lat + (latOffset * latStepDeg);
+                    double neighborLon = lon + (lonOffset * lonStepDeg);
+                    
+                    // Clamp to valid ranges
+                    neighborLat = Math.Max(MIN_LAT, Math.Min(MAX_LAT, neighborLat));
+                    neighborLon = Math.Max(MIN_LON, Math.Min(MAX_LON, neighborLon));
+                    
+                    try
+                    {
+                        string neighborEncoded = Encode(neighborLat, neighborLon);
+                        if (neighborEncoded != encoded) // Don't include self
+                            neighbors.Add(neighborEncoded);
+                    }
+                    catch
+                    {
+                        // Skip invalid coordinates
+                    }
+                }
+            }
+            
+            return neighbors.ToArray();
+        }
     }
 }

@@ -36,9 +36,9 @@ namespace Demo
 
             foreach (var (name, lat, lon) in landmarks)
             {
-                string encoded = MeterBasedCoordinateCompressor.Encode(lat, lon);
-                var (decodedLat, decodedLon) = MeterBasedCoordinateCompressor.Decode(encoded);
-                var (latErrorM, lonErrorM, totalErrorM) = MeterBasedCoordinateCompressor.GetActualPrecision(lat, lon);
+                string encoded = UniformPrecisionCoordinateCompressor.Encode(lat, lon);
+                var (decodedLat, decodedLon) = UniformPrecisionCoordinateCompressor.Decode(encoded);
+                var (latErrorM, lonErrorM, totalErrorM) = UniformPrecisionCoordinateCompressor.GetActualPrecision(lat, lon);
                 
                 Console.WriteLine($"{name,-15}: {lat,8:F4}, {lon,8:F4} → {encoded} (error: {totalErrorM:F1}m)");
             }
@@ -60,16 +60,16 @@ namespace Demo
 
             foreach (var (name, lat, lon) in examples)
             {
-                string compact = MeterBasedCoordinateCompressor.Encode(lat, lon, humanReadable: false);
-                string readable = MeterBasedCoordinateCompressor.Encode(lat, lon, humanReadable: true);
+                string compact = UniformPrecisionCoordinateCompressor.Encode(lat, lon, humanReadable: false);
+                string readable = UniformPrecisionCoordinateCompressor.Encode(lat, lon, humanReadable: true);
                 
                 Console.WriteLine($"{name}:");
                 Console.WriteLine($"  Compact:  {compact}");
                 Console.WriteLine($"  Readable: {readable}");
                 
                 // Demonstrate both formats decode to same result
-                var (lat1, lon1) = MeterBasedCoordinateCompressor.Decode(compact);
-                var (lat2, lon2) = MeterBasedCoordinateCompressor.Decode(readable);
+                var (lat1, lon1) = UniformPrecisionCoordinateCompressor.Decode(compact);
+                var (lat2, lon2) = UniformPrecisionCoordinateCompressor.Decode(readable);
                 
                 Console.WriteLine($"  Both decode to: ({lat1:F6}, {lon1:F6})");
                 Console.WriteLine();
@@ -97,9 +97,9 @@ namespace Demo
                 {
                     try
                     {
-                        string encoded = MeterBasedCoordinateCompressor.Encode(lat, lon);
-                        var (decodedLat, decodedLon) = MeterBasedCoordinateCompressor.Decode(encoded);
-                        var (latErrorM, lonErrorM, totalErrorM) = MeterBasedCoordinateCompressor.GetActualPrecision(lat, lon);
+                        string encoded = UniformPrecisionCoordinateCompressor.Encode(lat, lon);
+                        var (decodedLat, decodedLon) = UniformPrecisionCoordinateCompressor.Decode(encoded);
+                        var (latErrorM, lonErrorM, totalErrorM) = UniformPrecisionCoordinateCompressor.GetActualPrecision(lat, lon);
                         
                         Console.WriteLine($"\nOriginal:  ({lat:F6}, {lon:F6})");
                         Console.WriteLine($"Encoded:   {encoded}");

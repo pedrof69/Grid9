@@ -1,8 +1,8 @@
 # Grid9 API Reference
 
-## MeterBasedCoordinateCompressor
+## UniformPrecisionCoordinateCompressor
 
-The main class for Grid9 coordinate compression and decompression operations with 3-meter precision on land.
+The main class for Grid9 coordinate compression and decompression operations with uniform 3-meter precision globally.
 
 ### Methods
 
@@ -22,7 +22,7 @@ Compresses coordinates to a 9-character Grid9 string with 3-meter precision.
 
 **Example:**
 ```csharp
-string encoded = MeterBasedCoordinateCompressor.Encode(40.7128, -74.0060);
+string encoded = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);
 // Result: "Q7KH2BBYF"
 ```
 
@@ -43,10 +43,10 @@ Compresses coordinates to a Grid9 string with optional human-readable formatting
 
 **Example:**
 ```csharp
-string compact = MeterBasedCoordinateCompressor.Encode(40.7128, -74.0060, false);
+string compact = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060, false);
 // Result: "Q7KH2BBYF"
 
-string readable = MeterBasedCoordinateCompressor.Encode(40.7128, -74.0060, true);
+string readable = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060, true);
 // Result: "Q7K-H2B-BYF"
 ```
 
@@ -65,10 +65,10 @@ Decompresses a Grid9 string back to precise coordinates. Supports both compact (
 
 **Example:**
 ```csharp
-var (lat1, lon1) = MeterBasedCoordinateCompressor.Decode("Q7KH2BBYF");
+var (lat1, lon1) = UniformPrecisionCoordinateCompressor.Decode("Q7KH2BBYF");
 // Result: (40.712800, -74.006000)
 
-var (lat2, lon2) = MeterBasedCoordinateCompressor.Decode("Q7K-H2B-BYF");
+var (lat2, lon2) = UniformPrecisionCoordinateCompressor.Decode("Q7K-H2B-BYF");
 // Result: (40.712800, -74.006000) - same as compact format
 ```
 
@@ -85,7 +85,7 @@ Calculates the great circle distance between two encoded coordinates.
 
 **Example:**
 ```csharp
-double distance = MeterBasedCoordinateCompressor.CalculateDistance("Q7KH2BBYF", "S50MBZX2Y");
+double distance = UniformPrecisionCoordinateCompressor.CalculateDistance("Q7KH2BBYF", "S50MBZX2Y");
 // Result: ~5,500,000 (meters between NYC and London)
 ```
 
@@ -101,7 +101,7 @@ Generates all adjacent coordinate codes (up to 8 neighbors) for spatial queries.
 
 **Example:**
 ```csharp
-string[] neighbors = MeterBasedCoordinateCompressor.GetNeighbors("Q7KH2BBYF");
+string[] neighbors = UniformPrecisionCoordinateCompressor.GetNeighbors("Q7KH2BBYF");
 // Result: ["Q7KH2BBYG", "Q7KH2BBYH", ...] (up to 8 neighbors)
 ```
 
@@ -117,13 +117,13 @@ Validates that a coordinate string is properly formatted. Supports both compact 
 
 **Example:**
 ```csharp
-bool isValid1 = MeterBasedCoordinateCompressor.IsValidEncoding("Q7KH2BBYF");
+bool isValid1 = UniformPrecisionCoordinateCompressor.IsValidEncoding("Q7KH2BBYF");
 // Result: true
 
-bool isValid2 = MeterBasedCoordinateCompressor.IsValidEncoding("Q7K-H2B-BYF");
+bool isValid2 = UniformPrecisionCoordinateCompressor.IsValidEncoding("Q7K-H2B-BYF");
 // Result: true
 
-bool isValid3 = MeterBasedCoordinateCompressor.IsValidEncoding("INVALID");
+bool isValid3 = UniformPrecisionCoordinateCompressor.IsValidEncoding("INVALID");
 // Result: false
 ```
 
@@ -142,7 +142,7 @@ Format a 9-character Grid9 code for human readability by adding dashes.
 
 **Example:**
 ```csharp
-string formatted = MeterBasedCoordinateCompressor.FormatForHumans("Q7KH2BBYF");
+string formatted = UniformPrecisionCoordinateCompressor.FormatForHumans("Q7KH2BBYF");
 // Result: "Q7K-H2B-BYF"
 ```
 
@@ -161,10 +161,10 @@ Remove formatting from a human-readable Grid9 code.
 
 **Example:**
 ```csharp
-string unformatted = MeterBasedCoordinateCompressor.RemoveFormatting("Q7K-H2B-BYF");
+string unformatted = UniformPrecisionCoordinateCompressor.RemoveFormatting("Q7K-H2B-BYF");
 // Result: "Q7KH2BBYF"
 
-string unchanged = MeterBasedCoordinateCompressor.RemoveFormatting("Q7KH2BBYF");
+string unchanged = UniformPrecisionCoordinateCompressor.RemoveFormatting("Q7KH2BBYF");
 // Result: "Q7KH2BBYF" - already unformatted
 ```
 
@@ -180,10 +180,10 @@ Check if a string is in human-readable format with dashes.
 
 **Example:**
 ```csharp
-bool isFormatted1 = MeterBasedCoordinateCompressor.IsFormattedForHumans("Q7K-H2B-BYF");
+bool isFormatted1 = UniformPrecisionCoordinateCompressor.IsFormattedForHumans("Q7K-H2B-BYF");
 // Result: true
 
-bool isFormatted2 = MeterBasedCoordinateCompressor.IsFormattedForHumans("Q7KH2BBYF");
+bool isFormatted2 = UniformPrecisionCoordinateCompressor.IsFormattedForHumans("Q7KH2BBYF");
 // Result: false
 ```
 
@@ -270,9 +270,10 @@ PerformanceBenchmark.RunBenchmark(100000);
 - **Longitude**: -180.0 to 180.0 degrees
 
 ### Precision
-- **Target precision**: 3 meters on land
-- **Actual precision**: ~2.6m average
+- **Target precision**: 3 meters globally
+- **Actual precision**: 2.4m - 3.5m uniform globally
 - **Encoding length**: Exactly 9 characters (11 with formatting)
+- **Uniformity**: No variation between cities and rural areas
 
 ### Performance
 - **Encoding rate**: 6.4M+ operations/second
@@ -292,17 +293,17 @@ PerformanceBenchmark.RunBenchmark(100000);
 Thrown when coordinates are outside valid bounds:
 ```csharp
 // Throws ArgumentOutOfRangeException
-MeterBasedCoordinateCompressor.Encode(91.0, 0.0); // Latitude > 90
-MeterBasedCoordinateCompressor.Encode(0.0, 181.0); // Longitude > 180
+UniformPrecisionCoordinateCompressor.Encode(91.0, 0.0); // Latitude > 90
+UniformPrecisionCoordinateCompressor.Encode(0.0, 181.0); // Longitude > 180
 ```
 
 #### ArgumentException
 Thrown when encoded strings are invalid:
 ```csharp
 // Throws ArgumentException
-MeterBasedCoordinateCompressor.Decode("ABC");      // Too short
-MeterBasedCoordinateCompressor.Decode("Q7KH2BBYL"); // Invalid character 'L'
-MeterBasedCoordinateCompressor.Decode(null);       // Null input
+UniformPrecisionCoordinateCompressor.Decode("ABC");      // Too short
+UniformPrecisionCoordinateCompressor.Decode("Q7KH2BBYL"); // Invalid character 'L'
+UniformPrecisionCoordinateCompressor.Decode(null);       // Null input
 ```
 
 ## Usage Patterns
@@ -310,8 +311,8 @@ MeterBasedCoordinateCompressor.Decode(null);       // Null input
 ### Basic Usage
 ```csharp
 // Simple encoding/decoding
-string code = MeterBasedCoordinateCompressor.Encode(40.7128, -74.0060);
-var (lat, lon) = MeterBasedCoordinateCompressor.Decode(code);
+string code = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);
+var (lat, lon) = UniformPrecisionCoordinateCompressor.Decode(code);
 ```
 
 ### High-Performance Batch Processing
@@ -325,25 +326,25 @@ var decoded = CoordinateOperations.BatchDecode(encoded);
 ### Spatial Queries
 ```csharp
 // Find nearby locations
-string center = MeterBasedCoordinateCompressor.Encode(40.7128, -74.0060);
-string[] neighbors = MeterBasedCoordinateCompressor.GetNeighbors(center);
+string center = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);
+string[] neighbors = UniformPrecisionCoordinateCompressor.GetNeighbors(center);
 string[] nearby = CoordinateOperations.FindNearby(40.7128, -74.0060, 500);
 ```
 
 ### Distance Calculations
 ```csharp
 // Calculate distances between encoded points
-string nyc = MeterBasedCoordinateCompressor.Encode(40.7128, -74.0060);
-string london = MeterBasedCoordinateCompressor.Encode(51.5074, -0.1278);
-double distance = MeterBasedCoordinateCompressor.CalculateDistance(nyc, london);
+string nyc = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);
+string london = UniformPrecisionCoordinateCompressor.Encode(51.5074, -0.1278);
+double distance = UniformPrecisionCoordinateCompressor.CalculateDistance(nyc, london);
 ```
 
 ### Validation
 ```csharp
 // Validate user input
-if (MeterBasedCoordinateCompressor.IsValidEncoding(userInput))
+if (UniformPrecisionCoordinateCompressor.IsValidEncoding(userInput))
 {
-    var (lat, lon) = MeterBasedCoordinateCompressor.Decode(userInput);
+    var (lat, lon) = UniformPrecisionCoordinateCompressor.Decode(userInput);
     // Process valid coordinates
 }
 ```

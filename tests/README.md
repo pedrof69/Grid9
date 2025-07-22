@@ -6,7 +6,7 @@ This comprehensive test suite validates the **Grid9** implementation with 300+ u
 
 ## Test Coverage
 
-### 1. Core Functionality Tests (`MeterBasedCoordinateCompressorTests.cs`)
+### 1. Core Functionality Tests (`UniformPrecisionCoordinateCompressorTests.cs`)
 
 **Basic Operations (15 tests)**
 - ✅ Encoding produces 9-character strings
@@ -138,7 +138,7 @@ This comprehensive test suite validates the **Grid9** implementation with 300+ u
 dotnet test
 
 # Run specific test class
-dotnet test --filter "ClassName=MeterBasedCoordinateCompressorTests"
+dotnet test --filter "ClassName=UniformPrecisionCoordinateCompressorTests"
 
 # Run tests with detailed output
 dotnet test --verbosity detailed

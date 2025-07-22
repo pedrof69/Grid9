@@ -293,9 +293,7 @@ Grid9 was developed in response to the growing need for **precise, compact locat
 
 ## License
 
-**Grid9 Non-Commercial License** - Free for non-commercial use, commercial license required for business use.
-
-For commercial licensing, contact: grid9@ukdataservices.co.uk
+**MIT License** - Free and open source for any use, including commercial applications.
 
 See [LICENSE](LICENSE) file for complete terms.
 
@@ -311,7 +309,7 @@ See [LICENSE](LICENSE) file for complete terms.
 A: Shorter codes (9 vs 19+ chars) with equivalent precision globally. Grid9 provides uniform coverage worldwide including oceans.
 
 **Q: Can I use this commercially?**
-A: Commercial use requires a paid license. Non-commercial use is free! Contact grid9@ukdataservices.co.uk for commercial licensing.
+A: Yes! Grid9 is now licensed under the MIT License, allowing full commercial use without restrictions.
 
 **Q: Does Grid9 work everywhere on Earth?**
 A: Yes! Grid9 provides uniform 2.4-3.5m precision globally, including land areas, oceans, and polar regions.

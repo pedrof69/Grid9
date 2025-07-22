@@ -91,4 +91,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Meter-based latitude + degree-based longitude
 - Land coverage optimization
 - Case-insensitive decoding support
-- Grid9 Non-Commercial License (commercial licensing available)
+- MIT License (open source)

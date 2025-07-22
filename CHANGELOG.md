@@ -7,17 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-07-22
+
 ### Added
-- **UniformPrecisionCoordinateCompressor**: New algorithm achieving uniform 3m precision globally
-- Professional website with interactive demo
-- Marketing materials for Reddit and Hacker News launch
+- **UniformPrecisionCoordinateCompressor**: New algorithm achieving uniform 2.4-3.5m precision globally
+- `GetNeighbors()` method for spatial queries (returns up to 8 neighboring coordinates)
+- `GetActualPrecision()` method for precision measurement at specific locations
+- Professional website with interactive demo at https://pedrof69.github.io/Grid9/
+- Comprehensive API documentation with verified examples
 - Modern logo design with 9-square grid pattern
 - GitHub Pages deployment workflow
+- 227 comprehensive unit tests covering all functionality
 
 ### Changed
 - **BREAKING**: Replaced MeterBasedCoordinateCompressor with UniformPrecisionCoordinateCompressor
 - **MAJOR**: Eliminated precision variation between cities and rural areas
 - **MAJOR**: Global coverage including oceans and polar regions with consistent accuracy
+- Updated all documentation examples to match actual implementation behavior
+- CoordinateOperations now uses UniformPrecisionCoordinateCompressor consistently
+
+### Fixed
+- Corrected Tokyo coordinate example: 35.6762, 139.6503 → PAYMZ39T7 (was M3GK8WQPX)
+- Fixed NYC to London distance: 5,570,224m (was ~5,500,000m)
+- Updated precision measurements to match actual runtime values
+- Removed references to non-existent PerformanceBenchmark class
 - Updated all documentation to reflect uniform precision characteristics
 - Fixed README examples with actual Grid9 codes
 - Improved API documentation with correct performance metrics

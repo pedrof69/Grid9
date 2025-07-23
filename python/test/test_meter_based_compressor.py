@@ -86,8 +86,8 @@ class TestMeterBasedCoordinateCompressor:
         assert abs(lat_prec_eq - lat_prec_45) < 0.1
         assert abs(lat_prec_45 - lat_prec_60) < 0.1
         
-        # Longitude precision should vary with latitude
-        assert lon_prec_eq < lon_prec_45 < lon_prec_60
+        # Longitude precision should vary with latitude (gets better toward poles)
+        assert lon_prec_eq > lon_prec_45 > lon_prec_60
     
     def test_actual_precision(self):
         """Test actual precision at various locations"""

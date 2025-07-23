@@ -13,6 +13,7 @@ Grid9 is available in multiple languages from this single repository:
 - **[C#](./csharp/)** - Full .NET implementation
 - **[Python](./python/)** - Pure Python implementation
 - **[Java](./java/)** - Java 8+ implementation
+- **[JavaScript](./javascript/)** - Node.js and browser implementation
 
 ## Key Innovation: Uniform Precision Globally
 
@@ -65,6 +66,18 @@ mvn clean package
     <artifactId>grid9-java</artifactId>
     <version>1.0.0</version>
 </dependency>
+```
+
+#### JavaScript
+```bash
+# Install via NPM
+npm install grid9
+
+# Or use in browser
+<script src="https://unpkg.com/grid9"></script>
+
+# From javascript directory (development)
+cd javascript && npm install && npm test
 ```
 
 ### Basic Usage
@@ -139,6 +152,29 @@ double[] coords2 = UniformPrecisionCoordinateCompressor.decode("Q7K-H2B-BYF");
 // Get precision information
 double[] precision = UniformPrecisionCoordinateCompressor.getActualPrecision(40.7128, -74.0060);
 // Result: [2.4m, 1.8m, 3.0m] - [X error, Y error, total error]
+```
+
+#### JavaScript Example
+
+```javascript
+const Grid9 = require('grid9');
+
+// Grid9 System (9-Character Precision)
+const compact = Grid9.encode(40.7128, -74.0060); 
+// Result: "Q7KH2BBYF" - New York City (3m precision)
+
+// Human-readable format with dashes
+const readable = Grid9.encode(40.7128, -74.0060, true);
+// Result: "Q7K-H2B-BYF" - Same precision, better readability
+
+// Both formats decode to identical coordinates
+const coords1 = Grid9.decode("Q7KH2BBYF");
+const coords2 = Grid9.decode("Q7K-H2B-BYF");
+// Both return: { latitude: 40.712779, longitude: -74.005988 }
+
+// Get precision information
+const precision = Grid9.precision(40.7128, -74.0060);
+// Result: { xErrorM: 2.4, yErrorM: 1.8, totalErrorM: 3.0 }
 ```
 
 ### Alternative Systems
@@ -308,6 +344,8 @@ Result: 3-meter precision in exactly 9 characters!
 ### Prerequisites
 - **C#**: .NET 8.0 or later, C# 12.0 language features  
 - **Python**: Python 3.7 or later
+- **Java**: JDK 8 or later, Maven 3.6+
+- **JavaScript**: Node.js 14+ or modern browser
 
 ### Build & Test
 
@@ -333,6 +371,14 @@ python test_implementation.py
 cd Grid9/java
 mvn clean test
 mvn exec:java -Dexec.mainClass="com.grid9.demo.Grid9Demo"
+```
+
+#### JavaScript
+```bash
+cd Grid9/javascript
+npm install
+npm test
+npm run demo
 ```
 
 

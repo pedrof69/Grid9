@@ -129,6 +129,7 @@
             color: #4a5568;
             font-weight: 500;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
@@ -181,6 +182,10 @@
             text-decoration: none;
             transition: all 0.3s;
             font-weight: 600;
+        }
+        
+        .btn:hover {
+            cursor: pointer;
         }
 
         .btn-primary {
@@ -356,12 +361,29 @@
             color: #a0aec0;
             text-decoration: none;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .footer-links a:hover {
             color: white;
         }
 
+        /* Interactive Elements */
+        button, input[type="button"], input[type="submit"], .btn, a[href] {
+            cursor: pointer;
+        }
+        
+        button:hover, .btn:hover, a[href]:hover {
+            cursor: pointer;
+        }
+        
+        /* Remove text selection cursor on non-text elements */
+        .feature-icon, .logo, .nav-links, .btn, .footer-links {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .hero-content h1 {
@@ -383,27 +405,71 @@
     <header class="header">
         <nav class="nav container">
             <div class="logo">
-                <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grid9 Logo - 9 grid squares with number 9">
-                    <title>Grid9 Logo</title>
+                <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grid9 Logo - Modern tech grid with glowing 9">
+                    <title>Grid9 - Modern Tech Logo</title>
                     <defs>
+                        <!-- Modern gradient with tech colors -->
                         <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#5b73ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
                         </linearGradient>
+                        
+                        <!-- Glow effect for active squares -->
+                        <linearGradient id="activeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#0080ff;stop-opacity:0.9" />
+                        </linearGradient>
+                        
+                        <!-- Shadow filter for depth -->
+                        <filter id="logoShadow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/>
+                            <feOffset dx="0" dy="2" result="offsetblur"/>
+                            <feComponentTransfer>
+                                <feFuncA type="linear" slope="0.3"/>
+                            </feComponentTransfer>
+                            <feMerge> 
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/> 
+                            </feMerge>
+                        </filter>
+                        
+                        <!-- Glow filter -->
+                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
                     </defs>
-                    <g transform="translate(20, 20)">
-                        <!-- All 9 squares -->
-                        <rect x="0" y="0" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="22" y="0" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="44" y="0" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="0" y="22" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="22" y="22" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="44" y="22" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="0" y="44" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="22" y="44" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <rect x="44" y="44" width="16" height="16" fill="url(#logoGradient)" rx="2" opacity="0.4"/>
-                        <!-- Number 9 -->
-                        <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="url(#logoGradient)">9</text>
+                    
+                    <g transform="translate(15, 15)" filter="url(#logoShadow)">
+                        <!-- Modern 3x3 grid with hexagonal elements -->
+                        <!-- Top row -->
+                        <rect x="0" y="0" width="18" height="18" fill="url(#logoGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+                        <rect x="26" y="0" width="18" height="18" fill="url(#activeGradient)" rx="3" opacity="0.8" stroke="#00ffff" stroke-width="1" filter="url(#glow)"/>
+                        <rect x="52" y="0" width="18" height="18" fill="url(#logoGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+                        
+                        <!-- Middle row -->
+                        <rect x="0" y="26" width="18" height="18" fill="url(#logoGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+                        <rect x="26" y="26" width="18" height="18" fill="url(#activeGradient)" rx="3" opacity="0.8" stroke="#00ffff" stroke-width="1" filter="url(#glow)"/>
+                        <rect x="52" y="26" width="18" height="18" fill="url(#logoGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+                        
+                        <!-- Bottom row -->
+                        <rect x="0" y="52" width="18" height="18" fill="url(#logoGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+                        <rect x="26" y="52" width="18" height="18" fill="url(#activeGradient)" rx="3" opacity="0.8" stroke="#00ffff" stroke-width="1" filter="url(#glow)"/>
+                        <rect x="52" y="52" width="18" height="18" fill="url(#logoGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+                        
+                        <!-- Modern stylized "9" with tech font -->
+                        <text x="35" y="55" font-family="'Segoe UI', 'SF Pro Display', 'Roboto', sans-serif" font-size="42" font-weight="700" text-anchor="middle" fill="#ffffff" filter="url(#glow)">9</text>
+                        
+                        <!-- Subtle circuit-like connections -->
+                        <line x1="18" y1="9" x2="26" y2="9" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+                        <line x1="44" y1="9" x2="52" y2="9" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+                        <line x1="9" y1="18" x2="9" y2="26" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+                        <line x1="35" y1="18" x2="35" y2="26" stroke="#00ffff" stroke-width="1.5" opacity="0.6"/>
+                        <line x1="61" y1="18" x2="61" y2="26" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
                     </g>
                 </svg>
                 <span>Grid9</span>
@@ -423,39 +489,89 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <svg width="120" height="120" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto 2rem; display: block;" role="img" aria-label="Grid9 Hero Logo - Large 9 character grid system visual representation">
+                <svg width="120" height="120" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto 2rem; display: block;" role="img" aria-label="Grid9 Hero Logo - Advanced tech grid system with glowing elements">
                     <title>Grid9 - Revolutionary 9-Character Coordinate System</title>
-                    <desc>Interactive logo showing a 3x3 grid with the number 9, representing Grid9's coordinate compression system</desc>
+                    <desc>Modern tech logo showing an advanced 3x3 grid with glowing elements and the number 9, representing Grid9's coordinate compression system</desc>
                     <defs>
+                        <!-- Hero gradient with tech glow -->
                         <linearGradient id="heroLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9" />
-                            <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:0.9" />
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+                            <stop offset="50%" style="stop-color:#e0f4ff;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#c7e9ff;stop-opacity:0.85" />
                         </linearGradient>
-                        <filter id="heroShadow">
-                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                            <feOffset dx="0" dy="4" result="offsetblur"/>
+                        
+                        <!-- Active glow gradient -->
+                        <linearGradient id="heroActiveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#0080ff;stop-opacity:0.8" />
+                        </linearGradient>
+                        
+                        <!-- Enhanced shadow filter -->
+                        <filter id="heroShadow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+                            <feOffset dx="0" dy="6" result="offsetblur"/>
                             <feComponentTransfer>
-                                <feFuncA type="linear" slope="0.2"/>
+                                <feFuncA type="linear" slope="0.25"/>
                             </feComponentTransfer>
                             <feMerge> 
                                 <feMergeNode/>
                                 <feMergeNode in="SourceGraphic"/> 
                             </feMerge>
                         </filter>
+                        
+                        <!-- Hero glow effect -->
+                        <filter id="heroGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        
+                        <!-- Pulsing animation -->
+                        <animate id="pulse" attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
                     </defs>
-                    <g transform="translate(20, 20)" filter="url(#heroShadow)">
-                        <!-- All 9 squares representing global grid coverage -->
-                        <rect x="0" y="0" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="22" y="0" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="44" y="0" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="0" y="22" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="22" y="22" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="44" y="22" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="0" y="44" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="22" y="44" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <rect x="44" y="44" width="16" height="16" fill="url(#heroLogoGradient)" rx="2" opacity="0.5"/>
-                        <!-- Number 9 representing 9-character codes -->
-                        <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">9</text>
+                    
+                    <g transform="translate(15, 15)" filter="url(#heroShadow)">
+                        <!-- Modern 3x3 grid with enhanced styling -->
+                        <!-- Top row -->
+                        <rect x="0" y="0" width="18" height="18" fill="url(#heroLogoGradient)" rx="4" opacity="0.4" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+                        <rect x="26" y="0" width="18" height="18" fill="url(#heroActiveGradient)" rx="4" opacity="0.9" stroke="rgba(0,255,255,0.8)" stroke-width="2" filter="url(#heroGlow)">
+                            <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" repeatCount="indefinite"/>
+                        </rect>
+                        <rect x="52" y="0" width="18" height="18" fill="url(#heroLogoGradient)" rx="4" opacity="0.4" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+                        
+                        <!-- Middle row -->
+                        <rect x="0" y="26" width="18" height="18" fill="url(#heroLogoGradient)" rx="4" opacity="0.4" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+                        <rect x="26" y="26" width="18" height="18" fill="url(#heroActiveGradient)" rx="4" opacity="0.9" stroke="rgba(0,255,255,0.8)" stroke-width="2" filter="url(#heroGlow)">
+                            <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="1s" repeatCount="indefinite"/>
+                        </rect>
+                        <rect x="52" y="26" width="18" height="18" fill="url(#heroLogoGradient)" rx="4" opacity="0.4" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+                        
+                        <!-- Bottom row -->
+                        <rect x="0" y="52" width="18" height="18" fill="url(#heroLogoGradient)" rx="4" opacity="0.4" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+                        <rect x="26" y="52" width="18" height="18" fill="url(#heroActiveGradient)" rx="4" opacity="0.9" stroke="rgba(0,255,255,0.8)" stroke-width="2" filter="url(#heroGlow)">
+                            <animate attributeName="opacity" values="0.7;1;0.7" dur="4s" begin="2s" repeatCount="indefinite"/>
+                        </rect>
+                        <rect x="52" y="52" width="18" height="18" fill="url(#heroLogoGradient)" rx="4" opacity="0.4" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+                        
+                        <!-- Tech-style "9" with enhanced styling -->
+                        <text x="35" y="55" font-family="'SF Pro Display', 'Segoe UI', 'Roboto', sans-serif" font-size="45" font-weight="800" text-anchor="middle" fill="#ffffff" filter="url(#heroGlow)" style="text-shadow: 0 0 10px rgba(0,255,255,0.5);">9</text>
+                        
+                        <!-- Animated connection lines -->
+                        <line x1="18" y1="9" x2="26" y2="9" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" opacity="0.5">
+                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="44" y1="9" x2="52" y2="9" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" opacity="0.5">
+                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="35" y1="18" x2="35" y2="26" stroke="rgba(0,255,255,0.8)" stroke-width="2" opacity="0.7" filter="url(#heroGlow)">
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="35" y1="44" x2="35" y2="52" stroke="rgba(0,255,255,0.8)" stroke-width="2" opacity="0.7" filter="url(#heroGlow)">
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="1s" repeatCount="indefinite"/>
+                        </line>
                     </g>
                 </svg>
                 <h1>Grid9</h1>

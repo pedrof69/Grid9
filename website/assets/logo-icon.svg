@@ -1,28 +1,67 @@
 <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Grid9 Icon Logo: Simplified 3x3 grid forming "9" -->
+  <!-- Grid9 Modern Tech Icon Logo -->
   <defs>
+    <!-- Modern gradient with tech colors -->
     <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#5b73ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- Glow effect for active squares -->
+    <linearGradient id="activeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#0080ff;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <!-- Shadow filter for depth -->
+    <filter id="iconShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+    
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   
-  <!-- 3x3 Grid Pattern with all 9 squares -->
-  <g transform="translate(20, 20)">
-    <!-- All 9 squares in 3x3 grid -->
-    <rect x="0" y="0" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
-    <rect x="22" y="0" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
-    <rect x="44" y="0" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+  <g transform="translate(15, 15)" filter="url(#iconShadow)">
+    <!-- Modern 3x3 grid with hexagonal elements -->
+    <!-- Top row -->
+    <rect x="0" y="0" width="18" height="18" fill="url(#iconGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+    <rect x="26" y="0" width="18" height="18" fill="url(#activeGradient)" rx="3" opacity="0.8" stroke="#00ffff" stroke-width="1" filter="url(#glow)"/>
+    <rect x="52" y="0" width="18" height="18" fill="url(#iconGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
     
-    <rect x="0" y="22" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
-    <rect x="22" y="22" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
-    <rect x="44" y="22" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <!-- Middle row -->
+    <rect x="0" y="26" width="18" height="18" fill="url(#iconGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+    <rect x="26" y="26" width="18" height="18" fill="url(#activeGradient)" rx="3" opacity="0.8" stroke="#00ffff" stroke-width="1" filter="url(#glow)"/>
+    <rect x="52" y="26" width="18" height="18" fill="url(#iconGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
     
-    <rect x="0" y="44" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
-    <rect x="22" y="44" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
-    <rect x="44" y="44" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <!-- Bottom row -->
+    <rect x="0" y="52" width="18" height="18" fill="url(#iconGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
+    <rect x="26" y="52" width="18" height="18" fill="url(#activeGradient)" rx="3" opacity="0.8" stroke="#00ffff" stroke-width="1" filter="url(#glow)"/>
+    <rect x="52" y="52" width="18" height="18" fill="url(#iconGradient)" rx="3" opacity="0.3" stroke="#00d4ff" stroke-width="0.5"/>
     
-    <!-- Number 9 overlay -->
-    <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="url(#iconGradient)">9</text>
+    <!-- Modern stylized "9" with tech font -->
+    <text x="35" y="55" font-family="'Segoe UI', 'SF Pro Display', 'Roboto', sans-serif" font-size="42" font-weight="700" text-anchor="middle" fill="#ffffff" filter="url(#glow)">9</text>
+    
+    <!-- Subtle circuit-like connections -->
+    <line x1="18" y1="9" x2="26" y2="9" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+    <line x1="44" y1="9" x2="52" y2="9" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+    <line x1="9" y1="18" x2="9" y2="26" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+    <line x1="35" y1="18" x2="35" y2="26" stroke="#00ffff" stroke-width="1.5" opacity="0.6"/>
+    <line x1="61" y1="18" x2="61" y2="26" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
   </g>
 </svg>

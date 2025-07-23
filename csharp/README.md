@@ -97,6 +97,18 @@ var (lat, lon) = MeterBasedCoordinateCompressor.Decode(code);
 - .NET 8.0 or later
 - C# 12.0 language features
 
+## Other Language Implementations
+
+Grid9 is available in multiple programming languages with identical precision and functionality:
+
+- **[Python](../python/)** - Pure Python implementation
+- **[Java](../java/)** - Java 8+ implementation  
+- **[JavaScript](../javascript/)** - Node.js and browser implementation
+- **[C++](../cpp/)** - High-performance C++11 implementation
+- **[Rust](../rust/)** - Memory-safe Rust implementation
+
+All implementations produce identical Grid9 codes and maintain the same precision characteristics.
+
 ## Documentation
 
 For comprehensive documentation, examples, and API reference, see the main [README](../README.md).

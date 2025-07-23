@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2025-07-23
+
+### Added
+- **C++ Implementation**: High-performance C++11 compatible implementation
+  - Zero-allocation encoding/decoding for maximum performance
+  - CMake build system with optional Google Test integration
+  - Complete header-only option for easy integration
+  - Thread-safe operations with no global state
+  - Comprehensive demo application and test suite
+- **Rust Implementation**: Memory-safe Rust implementation
+  - Zero-allocation design with comprehensive error handling
+  - All operations return `Result<T, Grid9Error>` for safety
+  - Optional serde support for serialization/deserialization
+  - Criterion benchmarking for performance validation
+  - Extensive documentation and examples
+- **Multi-language consistency**: All 6 implementations now produce identical results
+- **Expanded documentation**: Updated all READMEs and website for 6-language support
+
+### Changed
+- **Website updated**: Now showcases all 6 programming languages (C#, Python, Java, JavaScript, C++, Rust)
+- **Main README enhanced**: Complete examples and installation instructions for all languages
+- **Meta tags updated**: SEO optimization for expanded language support
+
+### Technical Details
+- **C++**: Requires C++11 compatible compiler, CMake 3.12+
+- **Rust**: Requires Rust 1.70+ (2021 edition), zero unsafe code
+- Both implementations maintain the same precision characteristics and API patterns
+- Full cross-platform support (Windows, macOS, Linux)
+
 ## [1.0.0] - 2025-07-22
 
 ### Added

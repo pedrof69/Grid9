@@ -161,6 +161,18 @@ The Python API follows Python naming conventions while maintaining functional co
 | `CalculateDistance()` | `calculate_distance()` | Distance between two codes |
 | `IsValidEncoding()` | `is_valid_encoding()` | Validate Grid9 code |
 
+## Other Language Implementations
+
+Grid9 is available in multiple programming languages with identical precision and functionality:
+
+- **[C#](../csharp/)** - Full .NET implementation
+- **[Java](../java/)** - Java 8+ implementation  
+- **[JavaScript](../javascript/)** - Node.js and browser implementation
+- **[C++](../cpp/)** - High-performance C++11 implementation
+- **[Rust](../rust/)** - Memory-safe Rust implementation
+
+All implementations produce identical Grid9 codes and maintain the same precision characteristics.
+
 ## Documentation
 
 For comprehensive documentation, mathematical foundations, and detailed examples, see the main [README](../README.md).

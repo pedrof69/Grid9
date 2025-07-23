@@ -14,6 +14,8 @@ Grid9 is available in multiple languages from this single repository:
 - **[Python](./python/)** - Pure Python implementation
 - **[Java](./java/)** - Java 8+ implementation
 - **[JavaScript](./javascript/)** - Node.js and browser implementation
+- **[C++](./cpp/)** - High-performance C++11 implementation
+- **[Rust](./rust/)** - Memory-safe Rust implementation
 
 ## Key Innovation: Uniform Precision Globally
 
@@ -30,7 +32,7 @@ Grid9 delivers consistent **3-meter precision** everywhere using optimized coord
 - **Global coverage** - Works everywhere on Earth (including oceans)
 - **Uniform precision** - 2.4-3.5m accuracy consistently worldwide
 - **High performance** - Millions of operations per second
-- **Multi-language** - Available in C# and Python from a single codebase
+- **Multi-language** - Available in C#, Python, Java, JavaScript, C++, and Rust from a single codebase
 - **Production ready** - Comprehensive tests and documentation
 
 ## Quick Start
@@ -78,6 +80,33 @@ npm install grid9
 
 # From javascript directory (development)
 cd javascript && npm install && npm test
+```
+
+#### C++
+```bash
+# From cpp directory
+mkdir build && cd build
+cmake ..
+make
+
+# Run demo
+./grid9_demo
+
+# Run tests (if Google Test available)
+make test
+```
+
+#### Rust
+```bash
+# Add to Cargo.toml
+[dependencies]
+grid9 = "1.0.0"
+
+# From rust directory (development)
+cd rust && cargo build && cargo test
+
+# Run demo
+cargo run --example demo
 ```
 
 ### Basic Usage
@@ -175,6 +204,53 @@ const coords2 = Grid9.decode("Q7K-H2B-BYF");
 // Get precision information
 const precision = Grid9.precision(40.7128, -74.0060);
 // Result: { xErrorM: 2.4, yErrorM: 1.8, totalErrorM: 3.0 }
+```
+
+#### C++ Example
+
+```cpp
+#include "UniformPrecisionCoordinateCompressor.h"
+using namespace grid9;
+
+// Grid9 System (9-Character Precision)
+std::string compact = UniformPrecisionCoordinateCompressor::encode(40.7128, -74.0060);
+// Result: "Q7KH2BBYF" - New York City (3m precision)
+
+// Human-readable format with dashes
+std::string readable = UniformPrecisionCoordinateCompressor::encode(40.7128, -74.0060, true);
+// Result: "Q7K-H2B-BYF" - Same precision, better readability
+
+// Both formats decode to identical coordinates
+auto coords1 = UniformPrecisionCoordinateCompressor::decode("Q7KH2BBYF");
+auto coords2 = UniformPrecisionCoordinateCompressor::decode("Q7K-H2B-BYF");
+// Both return: (40.712779, -74.005988)
+
+// Get precision information
+auto precision = UniformPrecisionCoordinateCompressor::getActualPrecision(40.7128, -74.0060);
+// Result: {latErrorM: 1.8, lonErrorM: 2.4, totalErrorM: 3.0}
+```
+
+#### Rust Example
+
+```rust
+use grid9::{encode, decode, get_actual_precision};
+
+// Grid9 System (9-Character Precision)
+let compact = encode(40.7128, -74.0060, false)?;
+// Result: "Q7KH2BBYF" - New York City (3m precision)
+
+// Human-readable format with dashes
+let readable = encode(40.7128, -74.0060, true)?;
+// Result: "Q7K-H2B-BYF" - Same precision, better readability
+
+// Both formats decode to identical coordinates
+let (lat1, lon1) = decode("Q7KH2BBYF")?;
+let (lat2, lon2) = decode("Q7K-H2B-BYF")?;
+// Both return: (40.712779, -74.005988)
+
+// Get precision information
+let precision = get_actual_precision(40.7128, -74.0060)?;
+// Result: PrecisionInfo { lat_error_m: 1.8, lon_error_m: 2.4, total_error_m: 3.0 }
 ```
 
 ### Alternative Systems
@@ -346,6 +422,8 @@ Result: 3-meter precision in exactly 9 characters!
 - **Python**: Python 3.7 or later
 - **Java**: JDK 8 or later, Maven 3.6+
 - **JavaScript**: Node.js 14+ or modern browser
+- **C++**: C++11 compatible compiler, CMake 3.12+
+- **Rust**: Rust 1.70+ (2021 edition)
 
 ### Build & Test
 
@@ -379,6 +457,25 @@ cd Grid9/javascript
 npm install
 npm test
 npm run demo
+```
+
+#### C++
+```bash
+cd Grid9/cpp
+mkdir build && cd build
+cmake ..
+make
+./grid9_demo
+make test  # if Google Test available
+```
+
+#### Rust
+```bash
+cd Grid9/rust
+cargo build
+cargo test
+cargo run --example demo
+cargo bench  # run performance benchmarks
 ```
 
 

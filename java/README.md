@@ -197,6 +197,18 @@ try {
 
 MIT License - see [LICENSE](../LICENSE) file for details.
 
+## Other Language Implementations
+
+Grid9 is available in multiple programming languages with identical precision and functionality:
+
+- **[C#](../csharp/)** - Full .NET implementation
+- **[Python](../python/)** - Pure Python implementation
+- **[JavaScript](../javascript/)** - Node.js and browser implementation
+- **[C++](../cpp/)** - High-performance C++11 implementation
+- **[Rust](../rust/)** - Memory-safe Rust implementation
+
+All implementations produce identical Grid9 codes and maintain the same precision characteristics.
+
 ## Contributing
 
 Contributions are welcome! Please see [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.

@@ -1,29 +1,58 @@
 # Grid9 API Reference
 
-## UniformPrecisionCoordinateCompressor
+Grid9 is available in multiple programming languages with consistent APIs. This document covers the core functionality available across all implementations.
 
-The main class for Grid9 coordinate compression and decompression operations with uniform 3-meter precision globally.
+> **Language-Specific Documentation:**
+> - [C# Documentation](../csharp/README.md)
+> - [Python Documentation](../python/README.md) 
+> - [Java Documentation](../java/README.md)
+> - [JavaScript Documentation](../javascript/README.md)
+> - [C++ Documentation](../cpp/README.md)
+> - [Rust Documentation](../rust/README.md)
+
+## Core Functions
+
+The main functions for Grid9 coordinate compression and decompression operations with uniform 3-meter precision globally.
+
+> **Note**: API syntax varies by language. Examples show multiple language variants where helpful.
 
 ### Methods
 
-#### Encode(double latitude, double longitude)
+#### encode(latitude, longitude) / Encode(latitude, longitude)
 
 Compresses coordinates to a 9-character Grid9 string with 3-meter precision.
 
 **Parameters:**
-- `latitude` (double): Latitude in decimal degrees (-90 to 90)
-- `longitude` (double): Longitude in decimal degrees (-180 to 180)
+- `latitude` (double/float): Latitude in decimal degrees (-90 to 90)
+- `longitude` (double/float): Longitude in decimal degrees (-180 to 180)
 
 **Returns:**
-- `string`: 9-character encoded Grid9 coordinate string
+- 9-character encoded Grid9 coordinate string
 
-**Throws:**
-- `ArgumentOutOfRangeException`: When coordinates are outside valid bounds
+**Errors:**
+- Throws exception when coordinates are outside valid bounds
 
-**Example:**
+**Examples:**
 ```csharp
+// C#
 string encoded = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);
-// Result: "Q7KH2BBYF"
+
+// Python
+encoded = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060)
+
+// Java
+String encoded = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060);
+
+// JavaScript
+const encoded = Grid9.encode(40.7128, -74.0060);
+
+// C++
+std::string encoded = UniformPrecisionCoordinateCompressor::encode(40.7128, -74.0060);
+
+// Rust
+let encoded = encode(40.7128, -74.0060, false)?;
+
+// All result: "Q7KH2BBYF"
 ```
 
 #### Encode(double latitude, double longitude, bool humanReadable)

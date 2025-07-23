@@ -17,41 +17,131 @@ This project adheres to a code of conduct that we expect all participants to fol
 
 ## Development Setup
 
+Grid9 is available in multiple programming languages. Choose your preferred language for development:
+
 ### Prerequisites
 
-- .NET 8.0 SDK or later
+**All Languages:**
 - Git
-- Your favorite IDE (Visual Studio, VS Code, Rider, etc.)
+- Your favorite IDE/editor
+
+**Language-Specific:**
+- **C#**: .NET 8.0 SDK or later
+- **Python**: Python 3.7 or later
+- **Java**: JDK 8 or later, Maven 3.6+
+- **JavaScript**: Node.js 14+ or modern browser
+- **C++**: C++11 compatible compiler, CMake 3.12+
+- **Rust**: Rust 1.70+ (2021 edition)
 
 ### Building
 
 ```bash
 git clone https://github.com/pedrof69/Grid9.git
 cd Grid9
-dotnet build
+
+# C# / .NET
+cd csharp && dotnet build
+
+# Python
+cd python && pip install -e .
+
+# Java
+cd java && mvn clean compile
+
+# JavaScript
+cd javascript && npm install
+
+# C++
+cd cpp && mkdir build && cd build && cmake .. && make
+
+# Rust
+cd rust && cargo build
 ```
 
 ### Running Tests
 
 ```bash
-dotnet test
+# C# / .NET
+cd csharp && dotnet test
+
+# Python
+cd python && python -m pytest test/ -v
+
+# Java
+cd java && mvn test
+
+# JavaScript
+cd javascript && npm test
+
+# C++
+cd cpp/build && make test  # if Google Test available
+
+# Rust
+cd rust && cargo test
 ```
 
 ### Running Demo
 
 ```bash
-dotnet run --project demo
+# C# / .NET
+cd csharp && dotnet run --project demo
+
+# Python
+cd python && python test_implementation.py
+
+# Java
+cd java && mvn exec:java -Dexec.mainClass="com.grid9.demo.Grid9Demo"
+
+# JavaScript
+cd javascript && node demo/demo.js
+
+# C++
+cd cpp/build && ./grid9_demo
+
+# Rust
+cd rust && cargo run --example demo
 ```
 
 ## Contribution Guidelines
 
 ### Code Style
 
+Follow the established conventions for each language:
+
+**C#:**
 - Follow standard C# coding conventions
-- Use meaningful variable and method names
 - Add XML documentation comments for public APIs
-- Keep methods focused and concise
-- Use `var` for local variables when the type is obvious
+- Use `var` for local variables when type is obvious
+
+**Python:**
+- Follow PEP 8 style guidelines
+- Use type hints for function signatures
+- Add docstrings for all public functions/classes
+
+**Java:**
+- Follow Google Java Style Guide
+- Use JavaDoc comments for public APIs
+- Follow camelCase naming conventions
+
+**JavaScript:**
+- Follow ESLint recommended style
+- Use JSDoc comments for documentation
+- Prefer const/let over var
+
+**C++:**
+- Follow Google C++ Style Guide
+- Use Doxygen comments for documentation
+- Prefer modern C++11+ features
+
+**Rust:**
+- Follow rustfmt formatting
+- Use cargo clippy for linting
+- Add comprehensive documentation comments
+
+**All Languages:**
+- Use meaningful variable and method names
+- Keep functions focused and concise
+- Maintain consistency with existing code
 
 ### Performance Considerations
 
@@ -180,23 +270,43 @@ Brief description of changes
 
 ## Performance Benchmarking
 
-Use the built-in benchmarking:
+Use language-specific benchmarking tools:
 
+**C#:**
 ```bash
 dotnet run --project benchmarks -c Release
 ```
 
-For detailed profiling, use:
-
-```csharp
-PerformanceBenchmark.RunBenchmark(1000000);
+**Python:**
+```bash
+cd python && python -m pytest test/ --benchmark-only
 ```
 
-Expected performance baselines:
-- Encoding: >6M operations/second
-- Decoding: >7M operations/second
-- 32 bytes per operation
-- ~2.6m average error on land
+**Java:**
+```bash
+cd java && mvn exec:java -Dexec.mainClass="com.grid9.benchmark.PerformanceBenchmark"
+```
+
+**JavaScript:**
+```bash
+cd javascript && npm run benchmark
+```
+
+**C++:**
+```bash
+cd cpp/build && ./performance_benchmark
+```
+
+**Rust:**
+```bash
+cd rust && cargo bench
+```
+
+**Expected performance baselines:**
+- Encoding: >6M operations/second (varies by language)
+- Decoding: >7M operations/second (varies by language)
+- Memory: Minimal allocation per operation
+- Precision: ~2.4-3.5m globally
 
 ## Mathematical Verification
 

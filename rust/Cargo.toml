@@ -1,0 +1,38 @@
+[package]
+name = "grid9"
+version = "1.0.0"
+edition = "2021"
+authors = ["Grid9 Contributors"]
+description = "High-precision coordinate compression with uniform 3-meter global accuracy"
+license = "MIT"
+homepage = "https://pedrof69.github.io/Grid9/"
+repository = "https://github.com/pedrof69/Grid9"
+keywords = ["geolocation", "coordinates", "compression", "gis", "mapping"]
+categories = ["algorithms", "encoding", "science::geo"]
+readme = "README.md"
+
+[lib]
+name = "grid9"
+path = "src/lib.rs"
+
+[[example]]
+name = "demo"
+path = "examples/demo.rs"
+
+[dependencies]
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "performance"
+harness = false
+
+[features]
+default = []
+serde = ["dep:serde"]
+
+[dependencies.serde]
+version = "1.0"
+features = ["derive"]
+optional = true

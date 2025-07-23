@@ -548,5 +548,7 @@ Grid9 is available in multiple languages:
 - **[Python](../python/)** - Scientific computing and data analysis
 - **[Java](../java/)** - Enterprise and Android applications
 - **JavaScript** - Web, mobile, and Node.js applications
+- **[C++](../cpp/)** - High-performance C++11 implementation
+- **[Rust](../rust/)** - Memory-safe Rust implementation
 
 All implementations produce identical Grid9 codes and maintain the same precision characteristics.

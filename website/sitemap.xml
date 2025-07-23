@@ -7,7 +7,7 @@
     <!-- Main website page -->
     <url>
         <loc>https://pedrof69.github.io/Grid9/</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-07-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -15,35 +15,35 @@
     <!-- Documentation sections -->
     <url>
         <loc>https://pedrof69.github.io/Grid9/#features</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-07-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://pedrof69.github.io/Grid9/#languages</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-07-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://pedrof69.github.io/Grid9/#demo</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-07-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
         <loc>https://pedrof69.github.io/Grid9/#comparison</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-07-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
         <loc>https://pedrof69.github.io/Grid9/#download</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-07-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -51,7 +51,7 @@
     <!-- GitHub repository (external but related) -->
     <url>
         <loc>https://github.com/pedrof69/Grid9</loc>
-        <lastmod>2025-01-23</lastmod>
+        <lastmod>2025-07-23</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>

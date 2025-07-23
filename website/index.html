@@ -7,8 +7,8 @@
     <!-- Primary Meta Tags -->
     <title>Grid9 - Uniform Global Precision Coordinate Compression | 9-Character Location Codes</title>
     <meta name="title" content="Grid9 - Uniform Global Precision Coordinate Compression | 9-Character Location Codes">
-    <meta name="description" content="Grid9: Revolutionary 9-character coordinate compression with uniform 3-meter precision globally. 53% shorter than what3words. Available in C#, Python, and Java. Perfect for autonomous vehicles, precision agriculture, and IoT applications.">
-    <meta name="keywords" content="coordinate compression, GPS, location encoding, autonomous vehicles, precision agriculture, Grid9, geolocation, mapping, what3words alternative, plus codes, geohash, location coordinates, spatial indexing, C# library, Python library, Java library">
+    <meta name="description" content="Grid9: Revolutionary 9-character coordinate compression with uniform 3-meter precision globally. 53% shorter than what3words. Available in C#, Python, Java, JavaScript, C++, and Rust. Perfect for autonomous vehicles, precision agriculture, and IoT applications.">
+    <meta name="keywords" content="coordinate compression, GPS, location encoding, autonomous vehicles, precision agriculture, Grid9, geolocation, mapping, what3words alternative, plus codes, geohash, location coordinates, spatial indexing, C# library, Python library, Java library, JavaScript library, C++ library, Rust library">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Grid9 Team">
     <meta name="language" content="English">
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pedrof69.github.io/Grid9/">
     <meta property="og:title" content="Grid9 - Uniform Global Precision Coordinate Compression">
-    <meta property="og:description" content="Revolutionary 9-character coordinate compression with uniform 3-meter precision globally. 53% shorter than what3words. Available in C#, Python, and Java.">
+    <meta property="og:description" content="Revolutionary 9-character coordinate compression with uniform 3-meter precision globally. 53% shorter than what3words. Available in C#, Python, Java, JavaScript, C++, and Rust.">
     <meta property="og:image" content="https://pedrof69.github.io/Grid9/assets/logo-horizontal.svg">
     <meta property="og:site_name" content="Grid9">
     <meta property="og:locale" content="en_US">
@@ -39,11 +39,11 @@
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Grid9",
-      "description": "Revolutionary 9-character coordinate compression with uniform 3-meter precision globally. Available in C#, Python, and Java.",
+      "description": "Revolutionary 9-character coordinate compression with uniform 3-meter precision globally. Available in C#, Python, Java, JavaScript, C++, and Rust.",
       "url": "https://pedrof69.github.io/Grid9/",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Cross-platform",
-      "programmingLanguage": ["C#", "Python", "Java"],
+      "programmingLanguage": ["C#", "Python", "Java", "JavaScript", "C++", "Rust"],
       "license": "https://opensource.org/licenses/MIT",
       "author": {
         "@type": "Organization",
@@ -543,7 +543,7 @@
                 Grid9 is available in multiple programming languages from a single repository, 
                 following Google's libphonenumber pattern for consistent multi-language support.
             </div>
-            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>C# / .NET</h3>
@@ -588,10 +588,33 @@ const code = Grid9.encode(40.7128, -74.0060);<br>
                     <p><strong>63 tests</strong> • <strong>Node.js & browser</strong> • <strong>NPM ready</strong></p>
                     <a href="./javascript/" style="color: #667eea; text-decoration: none;">View JavaScript Documentation →</a>
                 </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>C++</h3>
+                    <div style="font-family: 'Courier New', monospace; background: #f1f5f9; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+#include "UniformPrecisionCoordinateCompressor.h"<br>
+using namespace grid9;<br><br>
+std::string code = UniformPrecisionCoordinateCompressor::encode(40.7128, -74.0060);<br>
+// Result: "Q7KH2BBYF"
+                    </div>
+                    <p><strong>C++11 compatible</strong> • <strong>Zero allocations</strong> • <strong>CMake ready</strong></p>
+                    <a href="./cpp/" style="color: #667eea; text-decoration: none;">View C++ Documentation →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🦀</div>
+                    <h3>Rust</h3>
+                    <div style="font-family: 'Courier New', monospace; background: #f1f5f9; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+use grid9::{encode, decode};<br><br>
+let code = encode(40.7128, -74.0060, false)?;<br>
+// Result: "Q7KH2BBYF"
+                    </div>
+                    <p><strong>Memory safe</strong> • <strong>Zero allocations</strong> • <strong>Serde support</strong></p>
+                    <a href="./rust/" style="color: #667eea; text-decoration: none;">View Rust Documentation →</a>
+                </div>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
                 <p style="color: #666; font-size: 0.9rem;">
-                    All four implementations produce identical Grid9 codes and maintain the same precision characteristics.
+                    All six implementations produce identical Grid9 codes and maintain the same precision characteristics.
                     Perfect for mixed-language environments and cross-platform applications.
                 </p>
             </div>
@@ -699,6 +722,12 @@ const code = Grid9.encode(40.7128, -74.0060);<br>
                         <br>
                         <div># JavaScript - Install via NPM</div>
                         <div style="color: #48bb78;">npm install grid9</div>
+                        <br>
+                        <div># C++ - Build with CMake</div>
+                        <div style="color: #48bb78;">mkdir build && cd build && cmake .. && make</div>
+                        <br>
+                        <div># Rust - Add to Cargo.toml</div>
+                        <div style="color: #48bb78;">cargo add grid9</div>
                         <br>
                         <div># Basic usage (all languages produce identical results)</div>
                         <div style="color: #fbb6ce;">// Grid9 code: "Q7KH2BBYF" (NYC)</div>

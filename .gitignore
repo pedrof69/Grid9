@@ -452,3 +452,13 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 java/target/
+
+# Root-level build artifacts
+/bin/
+/obj/
+/demo/
+
+# Python virtual environment (all projects)
+python/venv/
+venv/
+*.venv/

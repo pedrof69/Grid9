@@ -1,0 +1,28 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Grid9 Icon Logo: Simplified 3x3 grid forming "9" -->
+  <defs>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 3x3 Grid Pattern with all 9 squares -->
+  <g transform="translate(20, 20)">
+    <!-- All 9 squares in 3x3 grid -->
+    <rect x="0" y="0" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <rect x="22" y="0" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <rect x="44" y="0" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    
+    <rect x="0" y="22" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <rect x="22" y="22" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <rect x="44" y="22" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    
+    <rect x="0" y="44" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <rect x="22" y="44" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    <rect x="44" y="44" width="16" height="16" fill="url(#iconGradient)" rx="2" opacity="0.4"/>
+    
+    <!-- Number 9 overlay -->
+    <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="url(#iconGradient)">9</text>
+  </g>
+</svg>

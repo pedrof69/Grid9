@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid9 Python Documentation - PyPI Package</title>
+    <meta name="description" content="Grid9 Python implementation - Pure Python coordinate compression with 92% test coverage. Perfect for data science and geospatial applications.">
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3776ab 0%, #ffd43b 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .content {
+            background: white;
+            margin: 2rem auto;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+
+        code {
+            background: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-right: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: #3776ab;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2d5aa0;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #718096;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4a5568;
+            transform: translateY(-1px);
+        }
+
+        .highlight {
+            background: #fef5e7;
+            padding: 1rem;
+            border-left: 4px solid #f39c12;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background: #4caf50;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="../" class="logo">
+                <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(20, 20)" opacity="0.9">
+                        <rect x="0" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="0" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="0" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">9</text>
+                    </g>
+                </svg>
+                Grid9
+            </a>
+            <ul class="nav-links">
+                <li><a href="../">Home</a></li>
+                <li><a href="../#languages">Languages</a></li>
+                <li><a href="../#demo">Demo</a></li>
+                <li><a href="https://github.com/pedrof69/Grid9">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h1>Grid9 Python Implementation</h1>
+            
+            <p>The Python implementation of Grid9 provides pure Python coordinate compression perfect for data science, geospatial analysis, and scientific computing. With <strong>92% test coverage</strong> and support for Python 3.7+, it integrates seamlessly with NumPy, Pandas, and Jupyter notebooks.</p>
+
+            <div class="highlight">
+                <strong>Key Features:</strong> Pure Python (no dependencies) • NumPy/Pandas compatible • Jupyter notebook friendly • Scientific computing ready • 92% test coverage
+            </div>
+
+            <h2>Installation</h2>
+
+            <h3>PyPI Package</h3>
+            <pre><code># Install with pip
+pip install grid9
+
+# Install with development dependencies
+pip install grid9[dev]
+
+# Upgrade to latest version
+pip install --upgrade grid9</code></pre>
+
+            <h3>Conda Installation</h3>
+            <pre><code># Install from conda-forge
+conda install -c conda-forge grid9
+
+# Create new environment with grid9
+conda create -n myproject python=3.11 grid9</code></pre>
+
+            <h3>From Source</h3>
+            <pre><code>git clone https://github.com/pedrof69/Grid9.git
+cd Grid9/python
+pip install -e .</code></pre>
+
+            <h2>Quick Start</h2>
+
+            <h3>Basic Usage</h3>
+            <pre><code>from grid9 import UniformPrecisionCoordinateCompressor
+
+# Encode coordinates to Grid9 code
+code = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060)
+# Result: "Q7KH2BBYF"
+
+# Decode Grid9 code to coordinates
+lat, lon = UniformPrecisionCoordinateCompressor.decode("Q7KH2BBYF")
+# Result: (40.712779, -74.005988)
+
+# Human-readable format
+readable = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060, True)
+# Result: "Q7K-H2B-BYF"</code></pre>
+
+            <h3>Jupyter Notebook Integration</h3>
+            <pre><code>import pandas as pd
+from grid9 import UniformPrecisionCoordinateCompressor as Grid9
+
+# Create a DataFrame with coordinates
+df = pd.DataFrame({
+    'city': ['New York', 'London', 'Tokyo'],
+    'latitude': [40.7128, 51.5074, 35.6762],
+    'longitude': [-74.0060, -0.1278, 139.6503]
+})
+
+# Add Grid9 codes column
+df['grid9_code'] = df.apply(
+    lambda row: Grid9.encode(row['latitude'], row['longitude']), 
+    axis=1
+)
+
+print(df)
+#       city  latitude  longitude grid9_code
+# 0  New York   40.7128   -74.0060  Q7KH2BBYF
+# 1    London   51.5074    -0.1278  S50MBZX2Y
+# 2     Tokyo   35.6762   139.6503  PAYMZ39T7</code></pre>
+
+            <h3>NumPy Array Processing</h3>
+            <pre><code>import numpy as np
+from grid9 import CoordinateOperations
+
+# Process arrays of coordinates
+latitudes = np.array([40.7128, 51.5074, 35.6762])
+longitudes = np.array([-74.0060, -0.1278, 139.6503])
+
+# Vectorized encoding
+coordinates = list(zip(latitudes, longitudes))
+codes = CoordinateOperations.batch_encode(coordinates)
+
+# Convert back to arrays for further processing
+codes_array = np.array(codes)
+print(f"Generated {len(codes_array)} Grid9 codes")</code></pre>
+
+            <h2>API Reference</h2>
+
+            <h3>UniformPrecisionCoordinateCompressor</h3>
+            
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code>encode(lat, lon, human_readable=False)</code></td>
+                    <td>Encode coordinates to Grid9 code</td>
+                    <td>str</td>
+                </tr>
+                <tr>
+                    <td><code>decode(code)</code></td>
+                    <td>Decode Grid9 code to coordinates</td>
+                    <td>tuple[float, float]</td>
+                </tr>
+                <tr>
+                    <td><code>calculate_distance(code1, code2)</code></td>
+                    <td>Calculate distance in meters</td>
+                    <td>float</td>
+                </tr>
+                <tr>
+                    <td><code>get_neighbors(code)</code></td>
+                    <td>Get adjacent Grid9 codes</td>
+                    <td>list[str]</td>
+                </tr>
+                <tr>
+                    <td><code>is_valid_encoding(code)</code></td>
+                    <td>Validate Grid9 code format</td>
+                    <td>bool</td>
+                </tr>
+                <tr>
+                    <td><code>get_actual_precision(lat, lon)</code></td>
+                    <td>Get precision at coordinates</td>
+                    <td>tuple[float, float, float]</td>
+                </tr>
+            </table>
+
+            <h3>CoordinateOperations</h3>
+            
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code>batch_encode(coordinates)</code></td>
+                    <td>Encode multiple coordinates</td>
+                    <td>list[str]</td>
+                </tr>
+                <tr>
+                    <td><code>batch_decode(codes)</code></td>
+                    <td>Decode multiple codes</td>
+                    <td>list[tuple[float, float]]</td>
+                </tr>
+                <tr>
+                    <td><code>find_nearby(lat, lon, radius)</code></td>
+                    <td>Find codes within radius</td>
+                    <td>list[str]</td>
+                </tr>
+            </table>
+
+            <h2>Data Science Integration</h2>
+
+            <h3>Pandas DataFrame Operations</h3>
+            <pre><code>import pandas as pd
+from grid9 import UniformPrecisionCoordinateCompressor as Grid9
+
+# Load GPS tracking data
+df = pd.read_csv('gps_data.csv')
+
+# Add Grid9 encoding
+df['grid9'] = df.apply(lambda x: Grid9.encode(x.lat, x.lon), axis=1)
+
+# Group by Grid9 codes (3m resolution)
+location_groups = df.groupby('grid9').agg({
+    'timestamp': ['min', 'max', 'count'],
+    'speed': 'mean',
+    'heading': 'mean'
+})
+
+# Find most visited locations
+top_locations = df['grid9'].value_counts().head(10)</code></pre>
+
+            <h3>Geospatial Analysis</h3>
+            <pre><code>from grid9 import CoordinateOperations
+import matplotlib.pyplot as plt
+
+# Analyze location clusters
+def analyze_location_density(coordinates, radius=100):
+    """Find location clusters using Grid9 codes"""
+    density_map = {}
+    
+    for lat, lon in coordinates:
+        nearby_codes = CoordinateOperations.find_nearby(lat, lon, radius)
+        for code in nearby_codes:
+            density_map[code] = density_map.get(code, 0) + 1
+    
+    return density_map
+
+# Visualize density
+coords = [(40.7128, -74.0060), (40.7589, -73.9851), (40.6892, -74.0445)]
+density = analyze_location_density(coords)
+print(f"Found {len(density)} location clusters")</code></pre>
+
+            <h3>Scientific Computing</h3>
+            <pre><code>import numpy as np
+from scipy.spatial.distance import pdist
+from grid9 import UniformPrecisionCoordinateCompressor as Grid9
+
+# Generate synthetic GPS data
+n_points = 10000
+latitudes = np.random.normal(40.7128, 0.1, n_points)
+longitudes = np.random.normal(-74.0060, 0.1, n_points)
+
+# Convert to Grid9 codes for efficient storage
+codes = [Grid9.encode(lat, lon) for lat, lon in zip(latitudes, longitudes)]
+
+# Analyze unique locations (3m resolution)
+unique_locations = len(set(codes))
+compression_ratio = len(codes) / unique_locations
+
+print(f"Original points: {len(codes)}")
+print(f"Unique 3m locations: {unique_locations}")
+print(f"Compression ratio: {compression_ratio:.2f}x")</code></pre>
+
+            <h2>Performance</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Encoding Speed</h4>
+                    <p>245K+ operations/second</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Decoding Speed</h4>
+                    <p>280K+ operations/second</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Memory Usage</h4>
+                    <p>Minimal (pure Python)</p>
+                </div>
+            </div>
+
+            <h2>Advanced Features</h2>
+
+            <h3>Distance Calculations</h3>
+            <pre><code># Calculate distances between locations
+nyc = Grid9.encode(40.7128, -74.0060)
+london = Grid9.encode(51.5074, -0.1278)
+
+distance_meters = Grid9.calculate_distance(nyc, london)
+distance_km = distance_meters / 1000
+distance_miles = distance_meters / 1609.34
+
+print(f"NYC to London: {distance_km:.0f}km ({distance_miles:.0f} miles)")</code></pre>
+
+            <h3>Precision Analysis</h3>
+            <pre><code># Analyze precision at different latitudes
+latitudes = np.linspace(-90, 90, 19)  # Every 10 degrees
+longitude = 0.0
+
+precision_data = []
+for lat in latitudes:
+    x_error, y_error, total_error = Grid9.get_actual_precision(lat, longitude)
+    precision_data.append({
+        'latitude': lat,
+        'x_precision': x_error,
+        'y_precision': y_error,
+        'total_precision': total_error
+    })
+
+# Convert to DataFrame for analysis
+precision_df = pd.DataFrame(precision_data)
+print(precision_df)</code></pre>
+
+            <h3>Neighbor Analysis</h3>
+            <pre><code># Find neighboring locations
+center_code = Grid9.encode(40.7128, -74.0060)
+neighbors = Grid9.get_neighbors(center_code)
+
+print(f"Center: {center_code}")
+print(f"Neighbors: {neighbors}")
+
+# Calculate distances to neighbors
+for neighbor in neighbors:
+    distance = Grid9.calculate_distance(center_code, neighbor)
+    print(f"  {neighbor}: {distance:.1f}m away")</code></pre>
+
+            <h2>Testing</h2>
+            <pre><code># Run all tests with pytest
+python -m pytest
+
+# Run tests with coverage
+python -m pytest --cov=grid9 --cov-report=html
+
+# Run specific test file
+python -m pytest test/test_uniform_precision_compressor.py
+
+# Run performance benchmarks
+python test_implementation.py</code></pre>
+
+            <h2>Requirements</h2>
+            <ul>
+                <li>Python 3.7+ <span class="badge">✓</span></li>
+                <li>No external dependencies (pure Python)</li>
+                <li>Optional: NumPy, Pandas for data science workflows</li>
+                <li>Optional: pytest, pytest-cov for testing</li>
+            </ul>
+
+            <h2>Integration Examples</h2>
+
+            <h3>Flask Web API</h3>
+            <pre><code>from flask import Flask, request, jsonify
+from grid9 import UniformPrecisionCoordinateCompressor as Grid9
+
+app = Flask(__name__)
+
+@app.route('/api/encode', methods=['POST'])
+def encode_coordinates():
+    data = request.get_json()
+    try:
+        code = Grid9.encode(data['latitude'], data['longitude'])
+        return jsonify({'grid9_code': code})
+    except (KeyError, ValueError) as e:
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/api/decode/&lt;code&gt;')
+def decode_coordinate(code):
+    try:
+        lat, lon = Grid9.decode(code)
+        return jsonify({'latitude': lat, 'longitude': lon})
+    except ValueError:
+        return jsonify({'error': 'Invalid Grid9 code'}), 400</code></pre>
+
+            <h3>Django Model Integration</h3>
+            <pre><code>from django.db import models
+from grid9 import UniformPrecisionCoordinateCompressor as Grid9
+
+class Location(models.Model):
+    name = models.CharField(max_length=100)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    
+    @property
+    def grid9_code(self):
+        return Grid9.encode(self.latitude, self.longitude)
+    
+    @classmethod
+    def from_grid9(cls, code, name):
+        lat, lon = Grid9.decode(code)
+        return cls(name=name, latitude=lat, longitude=lon)</code></pre>
+
+            <div class="highlight">
+                <p><strong>Need help?</strong> Check out the <a href="https://github.com/pedrof69/Grid9/tree/master/python">full source code and examples</a> on GitHub or <a href="https://github.com/pedrof69/Grid9/issues">open an issue</a>.</p>
+            </div>
+
+            <a href="https://github.com/pedrof69/Grid9/tree/master/python" class="btn btn-primary">View on GitHub</a>
+            <a href="../" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Grid9. MIT Licensed. <a href="https://github.com/pedrof69/Grid9">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

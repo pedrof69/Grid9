@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid9 Rust Documentation - Memory Safe & Fast</title>
+    <meta name="description" content="Grid9 Rust implementation - Memory-safe coordinate compression with zero-allocation design. Perfect for systems programming and WebAssembly.">
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ce422b 0%, #f74c00 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .content {
+            background: white;
+            margin: 2rem auto;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+
+        code {
+            background: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-right: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: #ce422b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #b73725;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #718096;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4a5568;
+            transform: translateY(-1px);
+        }
+
+        .highlight {
+            background: #fef5e7;
+            padding: 1rem;
+            border-left: 4px solid #f39c12;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            background: #4caf50;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="../" class="logo">
+                <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(20, 20)" opacity="0.9">
+                        <rect x="0" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="0" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="0" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">9</text>
+                    </g>
+                </svg>
+                Grid9
+            </a>
+            <ul class="nav-links">
+                <li><a href="../">Home</a></li>
+                <li><a href="../#languages">Languages</a></li>
+                <li><a href="../#demo">Demo</a></li>
+                <li><a href="https://github.com/pedrof69/Grid9">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h1>Grid9 Rust Implementation</h1>
+            
+            <p>The Rust implementation of Grid9 combines memory safety with maximum performance. With <strong>comprehensive error handling</strong> using Result types and zero-allocation design, it's perfect for systems programming, WebAssembly, and safety-critical applications.</p>
+
+            <div class="highlight">
+                <strong>Key Features:</strong> Memory safe by design • Zero allocations • Result-based error handling • WebAssembly ready • Serde integration • No unsafe code • Comprehensive documentation
+            </div>
+
+            <h2>Installation</h2>
+
+            <h3>Cargo Package</h3>
+            <pre><code># Add to Cargo.toml
+[dependencies]
+grid9 = "1.0.0"
+
+# Install via cargo
+cargo add grid9
+
+# Install with Serde support
+grid9 = { version = "1.0.0", features = ["serde"] }</code></pre>
+
+            <h3>From Source</h3>
+            <pre><code>git clone https://github.com/pedrof69/Grid9.git
+cd Grid9/rust
+cargo build --release</code></pre>
+
+            <h2>Quick Start</h2>
+
+            <h3>Basic Usage</h3>
+            <pre><code>use grid9::{encode, decode, Grid9Error};
+
+fn main() -> Result&lt;(), Grid9Error&gt; {
+    // Encode coordinates to Grid9 code
+    let code = encode(40.7128, -74.0060, false)?;
+    println!("Grid9 Code: {}", code); // "Q7KH2BBYF"
+    
+    // Decode Grid9 code to coordinates
+    let (latitude, longitude) = decode(&code)?;
+    println!("Lat: {}, Lon: {}", latitude, longitude);
+    // Result: Lat: 40.712779, Lon: -74.005988
+    
+    // Human-readable format
+    let readable = encode(40.7128, -74.0060, true)?;
+    println!("Human readable: {}", readable); // "Q7K-H2B-BYF"
+    
+    Ok(())
+}</code></pre>
+
+            <h3>Error Handling</h3>
+            <pre><code>use grid9::{encode, decode, Grid9Error};
+
+fn safe_coordinate_processing(lat: f64, lon: f64) -> Result&lt;String, Grid9Error&gt; {
+    // Grid9 uses Result types for comprehensive error handling
+    match encode(lat, lon, false) {
+        Ok(code) => {
+            println!("Successfully encoded: {}", code);
+            
+            // Verify by decoding
+            match decode(&code) {
+                Ok((decoded_lat, decoded_lon)) => {
+                    println!("Decoded: {}, {}", decoded_lat, decoded_lon);
+                    Ok(code)
+                },
+                Err(e) => {
+                    eprintln!("Decode error: {}", e);
+                    Err(e)
+                }
+            }
+        },
+        Err(Grid9Error::InvalidLatitude(lat)) => {
+            eprintln!("Invalid latitude: {}", lat);
+            Err(Grid9Error::InvalidLatitude(lat))
+        },
+        Err(Grid9Error::InvalidLongitude(lon)) => {
+            eprintln!("Invalid longitude: {}", lon);
+            Err(Grid9Error::InvalidLongitude(lon))
+        },
+        Err(e) => Err(e)
+    }
+}</code></pre>
+
+            <h3>High-Performance Batch Processing</h3>
+            <pre><code>use grid9::coordinate_operations::{batch_encode, batch_decode};
+use rayon::prelude::*; // For parallel processing
+
+fn process_large_dataset(coordinates: Vec&lt;(f64, f64)&gt;) -> Vec&lt;String&gt; {
+    // Sequential batch processing
+    let codes: Result&lt;Vec&lt;String&gt;, _&gt; = batch_encode(&coordinates);
+    
+    match codes {
+        Ok(codes) =&gt; {
+            println!("Encoded {} coordinates", codes.len());
+            codes
+        },
+        Err(e) =&gt; {
+            eprintln!("Batch encoding failed: {}", e);
+            Vec::new()
+        }
+    }
+}
+
+// Parallel processing for maximum performance
+fn parallel_encode(coordinates: Vec&lt;(f64, f64)&gt;) -> Vec&lt;Option&lt;String&gt;&gt; {
+    coordinates.par_iter()
+        .map(|(lat, lon)| grid9::encode(*lat, *lon, false).ok())
+        .collect()
+}</code></pre>
+
+            <h2>API Reference</h2>
+
+            <h3>Core Functions</h3>
+            
+            <table>
+                <tr>
+                    <th>Function</th>
+                    <th>Description</th>
+                    <th>Returns</th>
+                </tr>
+                <tr>
+                    <td><code>encode(lat: f64, lon: f64, human_readable: bool)</code></td>
+                    <td>Encode coordinates to Grid9 code</td>
+                    <td>Result&lt;String, Grid9Error&gt;</td>
+                </tr>
+                <tr>
+                    <td><code>decode(code: &str)</code></td>
+                    <td>Decode Grid9 code to coordinates</td>
+                    <td>Result&lt;(f64, f64), Grid9Error&gt;</td>
+                </tr>
+                <tr>
+                    <td><code>calculate_distance(code1: &str, code2: &str)</code></td>
+                    <td>Calculate distance in meters</td>
+                    <td>Result&lt;f64, Grid9Error&gt;</td>
+                </tr>
+                <tr>
+                    <td><code>get_neighbors(code: &str)</code></td>
+                    <td>Get adjacent Grid9 codes</td>
+                    <td>Result&lt;Vec&lt;String&gt;, Grid9Error&gt;</td>
+                </tr>
+                <tr>
+                    <td><code>is_valid_encoding(code: &str)</code></td>
+                    <td>Validate Grid9 code format</td>
+                    <td>bool</td>
+                </tr>
+                <tr>
+                    <td><code>get_actual_precision(lat: f64, lon: f64)</code></td>
+                    <td>Get precision information</td>
+                    <td>Result&lt;(f64, f64, f64), Grid9Error&gt;</td>
+                </tr>
+            </table>
+
+            <h3>Error Types</h3>
+            
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>Grid9Error::InvalidLatitude(f64)</code></td>
+                    <td>Latitude outside -90 to 90 range</td>
+                </tr>
+                <tr>
+                    <td><code>Grid9Error::InvalidLongitude(f64)</code></td>
+                    <td>Longitude outside -180 to 180 range</td>
+                </tr>
+                <tr>
+                    <td><code>Grid9Error::InvalidCode(String)</code></td>
+                    <td>Malformed Grid9 code</td>
+                </tr>
+                <tr>
+                    <td><code>Grid9Error::InvalidLength</code></td>
+                    <td>Code length is not 9 or 11 characters</td>
+                </tr>
+                <tr>
+                    <td><code>Grid9Error::InvalidCharacter(char)</code></td>
+                    <td>Code contains invalid Base32 character</td>
+                </tr>
+            </table>
+
+            <h2>Advanced Features</h2>
+
+            <h3>Serde Integration</h3>
+            <pre><code>use grid9::{encode, decode};
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize)]
+struct Location {
+    name: String,
+    grid9_code: String,
+}
+
+impl Location {
+    fn new(name: String, latitude: f64, longitude: f64) -> Result&lt;Self, grid9::Grid9Error&gt; {
+        let grid9_code = encode(latitude, longitude, false)?;
+        Ok(Location { name, grid9_code })
+    }
+    
+    fn coordinates(&self) -> Result&lt;(f64, f64), grid9::Grid9Error&gt; {
+        decode(&self.grid9_code)
+    }
+}
+
+// JSON serialization
+fn serialize_location() -> Result&lt;String, Box&lt;dyn std::error::Error&gt;&gt; {
+    let location = Location::new("New York".to_string(), 40.7128, -74.0060)?;
+    let json = serde_json::to_string(&location)?;
+    Ok(json)
+}</code></pre>
+
+            <h3>WebAssembly Integration</h3>
+            <pre><code>use wasm_bindgen::prelude::*;
+use grid9::{encode, decode};
+
+#[wasm_bindgen]
+pub struct Grid9Wasm;
+
+#[wasm_bindgen]
+impl Grid9Wasm {
+    #[wasm_bindgen]
+    pub fn encode(latitude: f64, longitude: f64, human_readable: bool) -> Result&lt;String, JsValue&gt; {
+        encode(latitude, longitude, human_readable)
+            .map_err(|e| JsValue::from_str(&e.to_string()))
+    }
+    
+    #[wasm_bindgen]
+    pub fn decode(code: &str) -> Result&lt;js_sys::Array, JsValue&gt; {
+        match decode(code) {
+            Ok((lat, lon)) =&gt; {
+                let array = js_sys::Array::new();
+                array.push(&JsValue::from_f64(lat));
+                array.push(&JsValue::from_f64(lon));
+                Ok(array)
+            },
+            Err(e) =&gt; Err(JsValue::from_str(&e.to_string()))
+        }
+    }
+}
+
+// Build for WebAssembly
+// wasm-pack build --target web</code></pre>
+
+            <h3>Async Processing</h3>
+            <pre><code>use tokio;
+use grid9::{encode, decode};
+use futures::stream::{self, StreamExt};
+
+#[tokio::main]
+async fn main() -> Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    let coordinates = vec![
+        (40.7128, -74.0060),
+        (51.5074, -0.1278),
+        (35.6762, 139.6503),
+    ];
+    
+    // Process coordinates asynchronously
+    let codes: Vec&lt;Result&lt;String, _&gt;&gt; = stream::iter(coordinates)
+        .map(|(lat, lon)| async move {
+            // Simulate async processing (e.g., fetching from database)
+            tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+            encode(lat, lon, false)
+        })
+        .buffer_unordered(10) // Process up to 10 concurrently
+        .collect()
+        .await;
+    
+    for (i, result) in codes.iter().enumerate() {
+        match result {
+            Ok(code) =&gt; println!("Location {}: {}", i + 1, code),
+            Err(e) =&gt; eprintln!("Error encoding location {}: {}", i + 1, e),
+        }
+    }
+    
+    Ok(())
+}</code></pre>
+
+            <h2>Performance</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Encoding Speed</h4>
+                    <p>18M+ operations/second</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Decoding Speed</h4>
+                    <p>22M+ operations/second</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Memory Usage</h4>
+                    <p>Zero heap allocations</p>
+                </div>
+            </div>
+
+            <h3>Benchmarking</h3>
+            <pre><code># Run benchmarks with Criterion
+cargo bench
+
+# Run specific benchmark
+cargo bench encode
+
+# Generate benchmark report
+cargo bench -- --output-format html</code></pre>
+
+            <h3>Profile-Guided Optimization</h3>
+            <pre><code># Build with PGO for maximum performance
+export RUSTFLAGS="-Cprofile-generate=/tmp/pgo-data"
+cargo build --release
+./target/release/examples/demo
+export RUSTFLAGS="-Cprofile-use=/tmp/pgo-data -Cllvm-args=-pgo-warn-missing-function"
+cargo build --release</code></pre>
+
+            <h2>Systems Programming Integration</h2>
+
+            <h3>Embedded Systems (no_std)</h3>
+            <pre><code>#![no_std]
+#![no_main]
+
+use grid9_no_std::{encode, decode}; // Hypothetical no_std version
+use heapless::String; // Stack-allocated strings
+
+#[no_mangle]
+pub extern "C" fn process_gps_update(lat: f64, lon: f64) -> i32 {
+    let mut buffer: String&lt;16&gt; = String::new();
+    
+    match encode(lat, lon, false) {
+        Ok(code) =&gt; {
+            // Process the Grid9 code in embedded context
+            buffer.push_str(&code).ok();
+            transmit_location(&buffer);
+            0 // Success
+        },
+        Err(_) =&gt; -1 // Error
+    }
+}
+
+fn transmit_location(code: &str) {
+    // Send via LoRa, satellite, etc.
+}</code></pre>
+
+            <h3>FFI Integration</h3>
+            <pre><code>use std::ffi::{CStr, CString};
+use std::os::raw::c_char;
+use grid9::{encode, decode};
+
+#[no_mangle]
+pub extern "C" fn grid9_encode(
+    latitude: f64,
+    longitude: f64,
+    human_readable: bool
+) -> *mut c_char {
+    match encode(latitude, longitude, human_readable) {
+        Ok(code) =&gt; {
+            match CString::new(code) {
+                Ok(c_string) =&gt; c_string.into_raw(),
+                Err(_) =&gt; std::ptr::null_mut(),
+            }
+        },
+        Err(_) =&gt; std::ptr::null_mut(),
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn grid9_decode(
+    code: *const c_char,
+    latitude: *mut f64,
+    longitude: *mut f64
+) -> bool {
+    if code.is_null() || latitude.is_null() || longitude.is_null() {
+        return false;
+    }
+    
+    let c_str = unsafe { CStr::from_ptr(code) };
+    let code_str = match c_str.to_str() {
+        Ok(s) =&gt; s,
+        Err(_) =&gt; return false,
+    };
+    
+    match decode(code_str) {
+        Ok((lat, lon)) =&gt; {
+            unsafe {
+                *latitude = lat;
+                *longitude = lon;
+            }
+            true
+        },
+        Err(_) =&gt; false,
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn grid9_free_string(s: *mut c_char) {
+    if !s.is_null() {
+        unsafe {
+            let _ = CString::from_raw(s);
+        }
+    }
+}</code></pre>
+
+            <h2>Testing</h2>
+
+            <h3>Unit Tests</h3>
+            <pre><code># Run all tests
+cargo test
+
+# Run tests with output
+cargo test -- --nocapture
+
+# Run specific test
+cargo test test_encode_decode
+
+# Run tests with coverage
+cargo tarpaulin --out Html</code></pre>
+
+            <h3>Property-Based Testing</h3>
+            <pre><code>use proptest::prelude::*;
+use grid9::{encode, decode};
+
+proptest! {
+    #[test]
+    fn encode_decode_roundtrip(
+        lat in -90.0f64..90.0f64,
+        lon in -180.0f64..180.0f64
+    ) {
+        if let Ok(encoded) = encode(lat, lon, false) {
+            if let Ok((decoded_lat, decoded_lon)) = decode(&encoded) {
+                // Check that roundtrip preserves coordinates within precision
+                prop_assert!((lat - decoded_lat).abs() &lt; 0.002);
+                prop_assert!((lon - decoded_lon).abs() &lt; 0.002);
+            }
+        }
+    }
+}</code></pre>
+
+            <h2>Integration Examples</h2>
+
+            <h3>Actix Web Server</h3>
+            <pre><code>use actix_web::{web, App, HttpServer, Result, HttpResponse};
+use grid9::{encode, decode, Grid9Error};
+use serde::{Deserialize, Serialize};
+
+#[derive(Deserialize)]
+struct EncodeRequest {
+    latitude: f64,
+    longitude: f64,
+}
+
+#[derive(Serialize)]
+struct EncodeResponse {
+    grid9_code: String,
+}
+
+#[derive(Serialize)]
+struct DecodeResponse {
+    latitude: f64,
+    longitude: f64,
+}
+
+async fn encode_endpoint(req: web::Json&lt;EncodeRequest&gt;) -&gt; Result&lt;HttpResponse&gt; {
+    match encode(req.latitude, req.longitude, false) {
+        Ok(code) =&gt; Ok(HttpResponse::Ok().json(EncodeResponse { grid9_code: code })),
+        Err(Grid9Error::InvalidLatitude(_)) =&gt; {
+            Ok(HttpResponse::BadRequest().json("Invalid latitude"))
+        },
+        Err(Grid9Error::InvalidLongitude(_)) =&gt; {
+            Ok(HttpResponse::BadRequest().json("Invalid longitude"))
+        },
+        Err(_) =&gt; Ok(HttpResponse::InternalServerError().json("Encoding failed")),
+    }
+}
+
+async fn decode_endpoint(path: web::Path&lt;String&gt;) -&gt; Result&lt;HttpResponse&gt; {
+    let code = path.into_inner();
+    match decode(&code) {
+        Ok((lat, lon)) =&gt; Ok(HttpResponse::Ok().json(DecodeResponse {
+            latitude: lat,
+            longitude: lon,
+        })),
+        Err(_) =&gt; Ok(HttpResponse::BadRequest().json("Invalid Grid9 code")),
+    }
+}
+
+#[actix_web::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    HttpServer::new(|| {
+        App::new()
+            .route("/encode", web::post().to(encode_endpoint))
+            .route("/decode/{code}", web::get().to(decode_endpoint))
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+}</code></pre>
+
+            <h2>Requirements</h2>
+            <ul>
+                <li>Rust 1.56+ (2021 edition) <span class="badge">✓</span></li>
+                <li>No external runtime dependencies</li>
+                <li>Optional: Serde for serialization</li>
+                <li>Optional: wasm-bindgen for WebAssembly</li>
+            </ul>
+
+            <h2>Cross-Compilation</h2>
+            <pre><code># WebAssembly
+cargo build --target wasm32-unknown-unknown
+
+# ARM64
+cargo build --target aarch64-unknown-linux-gnu
+
+# Windows from Linux
+cargo build --target x86_64-pc-windows-gnu
+
+# macOS from Linux (with osxcross)
+cargo build --target x86_64-apple-darwin</code></pre>
+
+            <div class="highlight">
+                <p><strong>Need help?</strong> Check out the <a href="https://github.com/pedrof69/Grid9/tree/master/rust">full source code and examples</a> on GitHub or <a href="https://github.com/pedrof69/Grid9/issues">open an issue</a>.</p>
+            </div>
+
+            <a href="https://github.com/pedrof69/Grid9/tree/master/rust" class="btn btn-primary">View on GitHub</a>
+            <a href="../" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Grid9. MIT Licensed. <a href="https://github.com/pedrof69/Grid9">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

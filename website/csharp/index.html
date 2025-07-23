@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid9 C# Documentation - .NET Implementation</title>
+    <meta name="description" content="Grid9 C# implementation - High-performance coordinate compression with uniform 3-meter precision globally. Production-ready with 227 comprehensive tests.">
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .content {
+            background: white;
+            margin: 2rem auto;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+
+        code {
+            background: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card h4 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-right: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #718096;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4a5568;
+            transform: translateY(-1px);
+        }
+
+        .highlight {
+            background: #fef5e7;
+            padding: 1rem;
+            border-left: 4px solid #f39c12;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="../" class="logo">
+                <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(20, 20)" opacity="0.9">
+                        <rect x="0" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="0" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="0" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="22" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="0" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="22" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <rect x="44" y="44" width="16" height="16" fill="white" rx="2" opacity="0.3"/>
+                        <text x="30" y="52" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="white">9</text>
+                    </g>
+                </svg>
+                Grid9
+            </a>
+            <ul class="nav-links">
+                <li><a href="../">Home</a></li>
+                <li><a href="../#languages">Languages</a></li>
+                <li><a href="../#demo">Demo</a></li>
+                <li><a href="https://github.com/pedrof69/Grid9">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h1>Grid9 C# / .NET Implementation</h1>
+            
+            <p>The C# implementation of Grid9 provides a high-performance, production-ready coordinate compression library for .NET applications. With <strong>227 comprehensive tests</strong> and optimized performance, it's ideal for enterprise applications, web services, and high-throughput systems.</p>
+
+            <div class="highlight">
+                <strong>Key Features:</strong> Uniform 3-meter precision globally • 9-character codes • Human-readable formatting • Batch operations • Thread-safe • Zero-allocation hot paths
+            </div>
+
+            <h2>Installation</h2>
+
+            <h3>NuGet Package</h3>
+            <pre><code># Install via Package Manager
+Install-Package Grid9
+
+# Install via .NET CLI
+dotnet add package Grid9
+
+# Install via PackageReference
+&lt;PackageReference Include="Grid9" Version="1.0.0" /&gt;</code></pre>
+
+            <h3>From Source</h3>
+            <pre><code>git clone https://github.com/pedrof69/Grid9.git
+cd Grid9/csharp
+dotnet build</code></pre>
+
+            <h2>Quick Start</h2>
+
+            <h3>Basic Usage</h3>
+            <pre><code>using OptimalCoordinateCompression;
+
+// Encode coordinates to Grid9 code
+string code = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);
+// Result: "Q7KH2BBYF"
+
+// Decode Grid9 code to coordinates
+var (latitude, longitude) = UniformPrecisionCoordinateCompressor.Decode("Q7KH2BBYF");
+// Result: (40.712779, -74.005988)
+
+// Human-readable format
+string readable = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060, true);
+// Result: "Q7K-H2B-BYF"</code></pre>
+
+            <h3>Distance Calculation</h3>
+            <pre><code>string nyc = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);
+string london = UniformPrecisionCoordinateCompressor.Encode(51.5074, -0.1278);
+
+double distanceMeters = UniformPrecisionCoordinateCompressor.CalculateDistance(nyc, london);
+// Result: 5,570,224 meters</code></pre>
+
+            <h3>Batch Operations</h3>
+            <pre><code>// High-performance batch encoding
+var coordinates = new[] {
+    (40.7128, -74.0060),  // NYC
+    (51.5074, -0.1278),   // London
+    (35.6762, 139.6503)   // Tokyo
+};
+
+string[] codes = CoordinateOperations.BatchEncode(coordinates);
+// Results: ["Q7KH2BBYF", "S50MBZX2Y", "PAYMZ39T7"]</code></pre>
+
+            <h2>API Reference</h2>
+
+            <h3>UniformPrecisionCoordinateCompressor</h3>
+            
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>Encode(lat, lon)</code></td>
+                    <td>Encode coordinates to 9-character Grid9 code</td>
+                </tr>
+                <tr>
+                    <td><code>Encode(lat, lon, humanReadable)</code></td>
+                    <td>Encode with optional XXX-XXX-XXX formatting</td>
+                </tr>
+                <tr>
+                    <td><code>Decode(code)</code></td>
+                    <td>Decode Grid9 code to (latitude, longitude)</td>
+                </tr>
+                <tr>
+                    <td><code>CalculateDistance(code1, code2)</code></td>
+                    <td>Calculate distance between two codes in meters</td>
+                </tr>
+                <tr>
+                    <td><code>GetNeighbors(code)</code></td>
+                    <td>Get up to 8 neighboring Grid9 codes</td>
+                </tr>
+                <tr>
+                    <td><code>IsValidEncoding(code)</code></td>
+                    <td>Validate Grid9 code format</td>
+                </tr>
+                <tr>
+                    <td><code>GetActualPrecision(lat, lon)</code></td>
+                    <td>Get precision at specific coordinates</td>
+                </tr>
+            </table>
+
+            <h3>CoordinateOperations</h3>
+            
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>BatchEncode(coordinates)</code></td>
+                    <td>Encode multiple coordinates efficiently</td>
+                </tr>
+                <tr>
+                    <td><code>BatchDecode(codes)</code></td>
+                    <td>Decode multiple codes efficiently</td>
+                </tr>
+                <tr>
+                    <td><code>FindNearby(lat, lon, radius)</code></td>
+                    <td>Find codes within radius (meters)</td>
+                </tr>
+            </table>
+
+            <h2>Performance</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Encoding Speed</h4>
+                    <p>6.4M+ operations/second</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Decoding Speed</h4>
+                    <p>7.0M+ operations/second</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Memory Usage</h4>
+                    <p>32 bytes per operation</p>
+                </div>
+            </div>
+
+            <h3>Optimization Features</h3>
+            <ul>
+                <li>Aggressive inlining for hot paths</li>
+                <li>Zero-allocation encoding/decoding</li>
+                <li>Stack-allocated temporary arrays</li>
+                <li>Pre-computed lookup tables</li>
+                <li>Thread-safe operations</li>
+            </ul>
+
+            <h2>Advanced Features</h2>
+
+            <h3>Precision Information</h3>
+            <pre><code>var (xError, yError, totalError) = UniformPrecisionCoordinateCompressor
+    .GetActualPrecision(40.7128, -74.0060);
+// Result: (1.8m, 2.4m, 3.0m)</code></pre>
+
+            <h3>Neighboring Codes</h3>
+            <pre><code>string[] neighbors = UniformPrecisionCoordinateCompressor
+    .GetNeighbors("Q7KH2BBYF");
+// Returns up to 8 adjacent Grid9 codes</code></pre>
+
+            <h3>Validation</h3>
+            <pre><code>bool isValid = UniformPrecisionCoordinateCompressor
+    .IsValidEncoding("Q7KH2BBYF");
+// Result: true
+
+bool isValidFormatted = UniformPrecisionCoordinateCompressor
+    .IsValidEncoding("Q7K-H2B-BYF");
+// Result: true</code></pre>
+
+            <h2>Requirements</h2>
+            <ul>
+                <li>.NET 8.0 or later</li>
+                <li>C# 12.0 language features</li>
+                <li>No external dependencies</li>
+            </ul>
+
+            <h2>Testing</h2>
+            <pre><code># Run all tests
+dotnet test
+
+# Run with coverage
+dotnet test --collect:"XPlat Code Coverage"
+
+# Run specific test category
+dotnet test --filter Category=Performance</code></pre>
+
+            <h2>Integration Examples</h2>
+
+            <h3>ASP.NET Core Web API</h3>
+            <pre><code>[ApiController]
+[Route("api/[controller]")]
+public class LocationController : ControllerBase
+{
+    [HttpPost("encode")]
+    public IActionResult Encode([FromBody] CoordinateDto coords)
+    {
+        try
+        {
+            var code = UniformPrecisionCoordinateCompressor
+                .Encode(coords.Latitude, coords.Longitude);
+            return Ok(new { grid9Code = code });
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+}</code></pre>
+
+            <h3>Entity Framework Integration</h3>
+            <pre><code>public class Location
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
+    
+    // Computed property for Grid9 code
+    public string Grid9Code => 
+        UniformPrecisionCoordinateCompressor.Encode(Latitude, Longitude);
+}</code></pre>
+
+            <div class="highlight">
+                <p><strong>Need help?</strong> Check out the <a href="https://github.com/pedrof69/Grid9/tree/master/csharp">full source code and examples</a> on GitHub or <a href="https://github.com/pedrof69/Grid9/issues">open an issue</a>.</p>
+            </div>
+
+            <a href="https://github.com/pedrof69/Grid9/tree/master/csharp" class="btn btn-primary">View on GitHub</a>
+            <a href="../" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Grid9. MIT Licensed. <a href="https://github.com/pedrof69/Grid9">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

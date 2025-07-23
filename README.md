@@ -4,6 +4,8 @@ A multi-language coordinate compression library featuring **9-character Grid9 co
 
 **Developed for high-precision applications** including autonomous vehicles, precision agriculture, drone operations, and other automated systems requiring consistent location accuracy worldwide.
 
+🌐 **[Try Grid9 Live Demo](https://pedrof69.github.io/Grid9/)** | 📖 **[Full Documentation](https://pedrof69.github.io/Grid9/)** | ⭐ **[Star this repo!](https://github.com/pedrof69/Grid9)**
+
 ## Languages
 
 Grid9 is available in multiple languages from this single repository:

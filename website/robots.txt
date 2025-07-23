@@ -1,0 +1,27 @@
+# Grid9 Website Robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://pedrof69.github.io/Grid9/sitemap.xml
+
+# Additional crawl directives for better SEO
+Crawl-delay: 1
+
+# Block any potential spam bots (optional)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+# Encourage crawling of important pages
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

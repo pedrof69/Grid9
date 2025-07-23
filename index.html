@@ -350,6 +350,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
+                <li><a href="#languages">Languages</a></li>
                 <li><a href="#demo">Demo</a></li>
                 <li><a href="#comparison">Compare</a></li>
                 <li><a href="#download">Download</a></li>
@@ -444,6 +445,47 @@
                     <h3>Global Coverage</h3>
                     <p>Works everywhere on Earth including land, oceans, and polar regions with consistent precision worldwide.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Language Support Section -->
+    <section class="section" id="languages" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">Multi-Language Support</h2>
+            <div class="description" style="text-align: center; margin-bottom: 3rem;">
+                Grid9 is available in multiple programming languages from a single repository, 
+                following Google's libphonenumber pattern for consistent multi-language support.
+            </div>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>C# / .NET</h3>
+                    <div style="font-family: 'Courier New', monospace; background: #f1f5f9; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+using OptimalCoordinateCompression;<br><br>
+string code = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);<br>
+// Result: "Q7KH2BBYF"
+                    </div>
+                    <p><strong>227 tests</strong> • <strong>High performance</strong> • <strong>Production ready</strong></p>
+                    <a href="./csharp/" style="color: #667eea; text-decoration: none;">View C# Documentation →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🐍</div>
+                    <h3>Python</h3>
+                    <div style="font-family: 'Courier New', monospace; background: #f1f5f9; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+from src import UniformPrecisionCoordinateCompressor<br><br>
+code = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060)<br>
+# Result: "Q7KH2BBYF"
+                    </div>
+                    <p><strong>25 tests</strong> • <strong>92% coverage</strong> • <strong>Identical results</strong></p>
+                    <a href="./python/" style="color: #667eea; text-decoration: none;">View Python Documentation →</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: #666; font-size: 0.9rem;">
+                    Both implementations produce identical Grid9 codes and maintain the same precision characteristics.
+                    Perfect for mixed-language environments and cross-platform applications.
+                </p>
             </div>
         </div>
     </section>

@@ -79,7 +79,10 @@ var (latError, lonError, totalError) = UniformPrecisionCoordinateCompressor.GetA
 #### Python Example
 
 ```python
-from grid9 import UniformPrecisionCoordinateCompressor
+# Note: Import path depends on installation method
+# If installed: from grid9 import UniformPrecisionCoordinateCompressor  
+# From source: from src import UniformPrecisionCoordinateCompressor
+from src import UniformPrecisionCoordinateCompressor
 
 # Grid9 System (9-Character Precision)
 compact = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060)
@@ -264,24 +267,26 @@ Result: 3-meter precision in exactly 9 characters!
 ## Building & Testing
 
 ### Prerequisites
-- .NET 8.0 or later
-- C# 12.0 language features
+- **C#**: .NET 8.0 or later, C# 12.0 language features  
+- **Python**: Python 3.7 or later
 
-### Build
+### Build & Test
+
+#### C# / .NET
 ```bash
 git clone https://github.com/pedrof69/Grid9.git
-cd Grid9
+cd Grid9/csharp
 dotnet build
-```
-
-### Run Tests
-```bash
-dotnet test --logger console
-```
-
-### Run Demo
-```bash
+dotnet test tests/Tests.csproj
 dotnet run --project demo
+```
+
+#### Python
+```bash
+cd Grid9/python
+pip install -e .
+python -m pytest test/ -v
+python test_implementation.py
 ```
 
 

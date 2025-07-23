@@ -19,17 +19,28 @@ Grid9 delivers consistent **3-meter precision** everywhere using optimized coord
 - **Global coverage** - Works everywhere on Earth (including oceans)
 - **Uniform precision** - 2.4-3.5m accuracy consistently worldwide
 - **High performance** - Millions of operations per second
+- **Multi-language** - Available in C# and Python from a single codebase
 - **Production ready** - Comprehensive tests and documentation
 
 ## Quick Start
 
 ### Installation
 
+#### C# / .NET
 ```bash
 dotnet add package Grid9
 ```
 
+#### Python
+```bash
+pip install grid9
+# Or from source:
+cd python && pip install -e .
+```
+
 ### Basic Usage
+
+#### C# Example
 
 ```csharp
 using OptimalCoordinateCompression;
@@ -50,6 +61,29 @@ var (lat2, lon2) = UniformPrecisionCoordinateCompressor.Decode("Q7K-H2B-BYF");
 // Get precision information
 var (latError, lonError, totalError) = UniformPrecisionCoordinateCompressor.GetActualPrecision(40.7128, -74.0060);
 // Result: (1.8m, 2.4m, 3.0m)
+```
+
+#### Python Example
+
+```python
+from grid9 import UniformPrecisionCoordinateCompressor
+
+# Grid9 System (9-Character Precision)
+compact = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060)
+# Result: "Q7KH2BBYF" - New York City (3m precision)
+
+# Human-readable format with dashes
+readable = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060, human_readable=True)
+# Result: "Q7K-H2B-BYF" - Same precision, better readability
+
+# Both formats decode to identical coordinates
+lat1, lon1 = UniformPrecisionCoordinateCompressor.decode("Q7KH2BBYF")
+lat2, lon2 = UniformPrecisionCoordinateCompressor.decode("Q7K-H2B-BYF")
+# Both return: (40.712779, -74.005988)
+
+# Get precision information
+lat_error, lon_error, total_error = UniformPrecisionCoordinateCompressor.get_actual_precision(40.7128, -74.0060)
+# Result: (1.8m, 2.4m, 3.0m)
 ```
 
 ### Alternative Systems

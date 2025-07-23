@@ -480,10 +480,21 @@ code = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060)<br>
                     <p><strong>25 tests</strong> • <strong>92% coverage</strong> • <strong>Identical results</strong></p>
                     <a href="./python/" style="color: #667eea; text-decoration: none;">View Python Documentation →</a>
                 </div>
+                <div class="feature-card">
+                    <div class="feature-icon">☕</div>
+                    <h3>Java</h3>
+                    <div style="font-family: 'Courier New', monospace; background: #f1f5f9; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+import com.grid9.core.UniformPrecisionCoordinateCompressor;<br><br>
+String code = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060);<br>
+// Result: "Q7KH2BBYF"
+                    </div>
+                    <p><strong>20+ tests</strong> • <strong>Java 8+ compatible</strong> • <strong>Maven ready</strong></p>
+                    <a href="./java/" style="color: #667eea; text-decoration: none;">View Java Documentation →</a>
+                </div>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
                 <p style="color: #666; font-size: 0.9rem;">
-                    Both implementations produce identical Grid9 codes and maintain the same precision characteristics.
+                    All three implementations produce identical Grid9 codes and maintain the same precision characteristics.
                     Perfect for mixed-language environments and cross-platform applications.
                 </p>
             </div>
@@ -580,12 +591,18 @@ code = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060)<br>
                 <div style="background: #f7fafc; padding: 3rem; border-radius: 15px; margin-bottom: 2rem;">
                     <h3 style="margin-bottom: 2rem;">Quick Installation</h3>
                     <div style="background: #2d3748; color: white; padding: 1.5rem; border-radius: 8px; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 2rem;">
-                        <div># Install via NuGet</div>
+                        <div># C# / .NET - Install via NuGet</div>
                         <div style="color: #48bb78;">dotnet add package Grid9</div>
                         <br>
-                        <div># Basic usage</div>
-                        <div style="color: #fbb6ce;">string code = UniformPrecisionCoordinateCompressor.Encode(40.7128, -74.0060);</div>
-                        <div style="color: #90cdf4;">// Result: "Q7KH2BBYF"</div>
+                        <div># Python - Install from source</div>
+                        <div style="color: #48bb78;">pip install -e ./python</div>
+                        <br>
+                        <div># Java - Build with Maven</div>
+                        <div style="color: #48bb78;">mvn clean package</div>
+                        <br>
+                        <div># Basic usage (all languages produce identical results)</div>
+                        <div style="color: #fbb6ce;">// Grid9 code: "Q7KH2BBYF" (NYC)</div>
+                        <div style="color: #90cdf4;">// Uniform 3m precision globally</div>
                     </div>
                     <div class="cta-buttons">
                         <a href="https://github.com/pedrof69/Grid9" class="btn btn-primary">GitHub Repository</a>

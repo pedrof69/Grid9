@@ -10,6 +10,7 @@ Grid9 is available in multiple languages from this single repository:
 
 - **[C#](./csharp/)** - Full .NET implementation
 - **[Python](./python/)** - Pure Python implementation
+- **[Java](./java/)** - Java 8+ implementation
 
 ## Key Innovation: Uniform Precision Globally
 
@@ -49,6 +50,19 @@ pip install -e .
 
 # Or install from PyPI (when published)
 pip install grid9
+```
+
+#### Java
+```bash
+# From java directory
+mvn clean package
+
+# Or add Maven dependency
+<dependency>
+    <groupId>com.grid9</groupId>
+    <artifactId>grid9-java</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
 
 ### Basic Usage
@@ -100,6 +114,29 @@ lat2, lon2 = UniformPrecisionCoordinateCompressor.decode("Q7K-H2B-BYF")
 # Get precision information
 lat_error, lon_error, total_error = UniformPrecisionCoordinateCompressor.get_actual_precision(40.7128, -74.0060)
 # Result: (1.8m, 2.4m, 3.0m)
+```
+
+#### Java Example
+
+```java
+import com.grid9.core.UniformPrecisionCoordinateCompressor;
+
+// Grid9 System (9-Character Precision)
+String compact = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060); 
+// Result: "Q7KH2BBYF" - New York City (3m precision)
+
+// Human-readable format with dashes
+String readable = UniformPrecisionCoordinateCompressor.encode(40.7128, -74.0060, true);
+// Result: "Q7K-H2B-BYF" - Same precision, better readability
+
+// Both formats decode to identical coordinates
+double[] coords1 = UniformPrecisionCoordinateCompressor.decode("Q7KH2BBYF");
+double[] coords2 = UniformPrecisionCoordinateCompressor.decode("Q7K-H2B-BYF");
+// Both return: [40.712779, -74.005988]
+
+// Get precision information
+double[] precision = UniformPrecisionCoordinateCompressor.getActualPrecision(40.7128, -74.0060);
+// Result: [2.4m, 1.8m, 3.0m] - [X error, Y error, total error]
 ```
 
 ### Alternative Systems
@@ -287,6 +324,13 @@ cd Grid9/python
 pip install -e .
 python -m pytest test/ -v
 python test_implementation.py
+```
+
+#### Java
+```bash
+cd Grid9/java
+mvn clean test
+mvn exec:java -Dexec.mainClass="com.grid9.demo.Grid9Demo"
 ```
 
 

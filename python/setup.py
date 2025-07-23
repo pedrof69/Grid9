@@ -1,6 +1,9 @@
 from setuptools import setup, find_packages
+import os
 
-with open("../README.md", "r", encoding="utf-8") as fh:
+# Read the main README from the repository root
+readme_path = os.path.join(os.path.dirname(__file__), '..', 'README.md')
+with open(readme_path, "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
@@ -11,7 +14,8 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/yourusername/grid9",
-    packages=find_packages(),
+    package_dir={'grid9': 'src'},
+    packages=['grid9'],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

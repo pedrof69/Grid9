@@ -3,7 +3,7 @@ Unit tests for MeterBasedCoordinateCompressor
 """
 
 import pytest
-from grid9 import MeterBasedCoordinateCompressor
+from src import MeterBasedCoordinateCompressor
 
 
 class TestMeterBasedCoordinateCompressor:

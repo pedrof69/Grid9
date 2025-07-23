@@ -3,7 +3,7 @@ Unit tests for CoordinateOperations
 """
 
 import pytest
-from grid9 import CoordinateOperations, UniformPrecisionCoordinateCompressor
+from src import CoordinateOperations, UniformPrecisionCoordinateCompressor
 
 
 class TestCoordinateOperations:

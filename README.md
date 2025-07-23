@@ -1,8 +1,15 @@
 # Grid9 - Precision Coordinate Compression
 
-A revolutionary coordinate compression system featuring **9-character Grid9 codes** with **uniform 3-meter precision globally** - eliminating the precision variation that affects other coordinate systems!
+A multi-language coordinate compression library featuring **9-character Grid9 codes** with **uniform 3-meter precision globally** - eliminating the precision variation that affects other coordinate systems!
 
 **Developed for high-precision applications** including autonomous vehicles, precision agriculture, drone operations, and other automated systems requiring consistent location accuracy worldwide.
+
+## Languages
+
+Grid9 is available in multiple languages from this single repository:
+
+- **[C#](./csharp/)** - Full .NET implementation
+- **[Python](./python/)** - Pure Python implementation
 
 ## Key Innovation: Uniform Precision Globally
 
@@ -28,14 +35,20 @@ Grid9 delivers consistent **3-meter precision** everywhere using optimized coord
 
 #### C# / .NET
 ```bash
+# From csharp directory
+dotnet build
+
+# Or add as package
 dotnet add package Grid9
 ```
 
 #### Python
 ```bash
+# From python directory
+pip install -e .
+
+# Or install from PyPI (when published)
 pip install grid9
-# Or from source:
-cd python && pip install -e .
 ```
 
 ### Basic Usage

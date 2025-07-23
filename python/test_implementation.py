@@ -3,7 +3,7 @@
 Quick test script to verify the Python implementation works correctly
 """
 
-from grid9 import UniformPrecisionCoordinateCompressor, MeterBasedCoordinateCompressor, CoordinateOperations
+from src import UniformPrecisionCoordinateCompressor, MeterBasedCoordinateCompressor, CoordinateOperations
 
 
 def test_uniform_precision():

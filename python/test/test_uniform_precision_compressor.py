@@ -3,7 +3,7 @@ Unit tests for UniformPrecisionCoordinateCompressor
 """
 
 import pytest
-from grid9 import UniformPrecisionCoordinateCompressor
+from src import UniformPrecisionCoordinateCompressor
 
 
 class TestUniformPrecisionCoordinateCompressor:
